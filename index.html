@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ============ PRIMARY SEO ============ -->
+  <title>Arbien M. Armenion | Web Developer &amp; QA-Minded Front-End Engineer</title>
+  <meta name="description" content="Arbien M. Armenion is a web developer who builds fast, accessible, responsive websites and tests them with a QA mindset. View projects, services, and get in touch." />
+  <meta name="keywords" content="Arbien Armenion, web developer, front-end developer, QA tester, quality assurance, portfolio, responsive web design, accessible websites, Philippines web developer" />
+  <meta name="author" content="Arbien M. Armenion" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="theme-color" content="#F4F1EA" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#12141C" media="(prefers-color-scheme: dark)" />
+
+  <!-- Update this to your live domain once deployed -->
+  <link rel="canonical" href="https://arbienarmenion.com/" />
+
+  <!-- ============ OPEN GRAPH ============ -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Arbien M. Armenion — Portfolio" />
+  <meta property="og:title" content="Arbien M. Armenion | Web Developer &amp; QA-Minded Front-End Engineer" />
+  <meta property="og:description" content="I build fast, accessible websites and test them like a QA engineer. See my projects, services, and how we can work together." />
+  <meta property="og:url" content="https://arbienarmenion.com/" />
+  <meta property="og:image" content="https://arbienarmenion.com/assets/profile.jpg" />
+  <meta property="og:image:alt" content="Arbien M. Armenion, Web Developer" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- ============ TWITTER CARD ============ -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Arbien M. Armenion | Web Developer &amp; QA-Minded Front-End Engineer" />
+  <meta name="twitter:description" content="I build fast, accessible websites and test them like a QA engineer." />
+  <meta name="twitter:image" content="https://arbienarmenion.com/assets/profile.jpg" />
+
+  <!-- ============ ICONS ============ -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/favicon.svg" />
+
+  <!-- ============ FONTS: Poppins ============ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- ============ PHOSPHOR ICONS ============ -->
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
+
+  <link rel="stylesheet" href="css/style.css?v=20260909154523" />
+
+  <!-- Marks that JS is running, so scroll-reveal only hides content it can bring back -->
+  <script>document.documentElement.className += " js";</script>
+
+  <!-- ============ STRUCTURED DATA (schema.org) ============ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Arbien M. Armenion",
+    "givenName": "Arbien",
+    "familyName": "Armenion",
+    "jobTitle": "Web Developer",
+    "image": "https://arbienarmenion.com/assets/profile.jpg",
+    "description": "Web developer with quality assurance experience, building fast, accessible and responsive websites.",
+    "email": "mailto:armenionarbien53@gmail.com",
+    "url": "https://arbienarmenion.com/",
+    "knowsAbout": [
+      "Web Development",
+      "Front-End Development",
+      "Quality Assurance Testing",
+      "Responsive Web Design",
+      "Web Accessibility",
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "sameAs": [
+      "https://github.com/NE0FEL1S",
+      "https://www.linkedin.com/in/arbien-armenion-782919369/"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Arbien M. Armenion — Portfolio",
+    "url": "https://arbienarmenion.com/",
+    "inLanguage": "en",
+    "author": { "@type": "Person", "name": "Arbien M. Armenion" }
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- ================= MOBILE TOP BAR ================= -->
+  <div class="topbar">
+    <span class="topbar__name">Arbien M. Armenion</span>
+    <button class="topbar__toggle" id="navToggle" aria-expanded="false" aria-controls="sidebar" aria-label="Open navigation menu">
+      <i class="ph ph-list" aria-hidden="true"></i>
+    </button>
+  </div>
+  <div class="nav-scrim" id="navScrim" hidden></div>
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__inner">
+
+      <div class="profile">
+        <div class="profile__avatar">
+          <img src="assets/profile.jpg" width="400" height="400" decoding="async"
+               alt="Arbien M. Armenion, smiling in graduation robes." />
+        </div>
+        <p class="profile__name">
+          Arbien M. Armenion
+          <i class="ph-fill ph-seal-check profile__badge" aria-label="Verified developer" role="img"></i>
+        </p>
+        <p class="profile__handle">Web Developer &middot; QA Mindset</p>
+
+        <ul class="socials" aria-label="Social links">
+          <li><a href="https://github.com/NE0FEL1S" class="social" aria-label="GitHub profile" target="_blank" rel="noopener noreferrer"><img class="brand-logo brand-logo--dim" src="assets/logos/github.svg" alt="" width="22" height="22" /></a></li>
+          <li><a href="https://www.linkedin.com/in/arbien-armenion-782919369/" class="social" aria-label="LinkedIn profile" target="_blank" rel="noopener noreferrer"><i class="ph-fill ph-linkedin-logo brand-glyph brand-glyph--linkedin" aria-hidden="true"></i></a></li>
+          <li><a href="mailto:armenionarbien53@gmail.com" class="social" aria-label="Send me an email"><img class="brand-logo" src="assets/logos/gmail.svg" alt="" width="22" height="22" /></a></li>
+          <li>
+            <button type="button" class="social" id="themeToggle" aria-label="Switch to dark mode" aria-pressed="false">
+              <i class="ph-bold ph-moon" aria-hidden="true" id="themeIcon"></i>
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <nav class="nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="#home" class="nav__link is-active"><i class="ph ph-house" aria-hidden="true"></i><span>Home</span></a></li>
+          <li><a href="#projects" class="nav__link"><i class="ph ph-folder-simple" aria-hidden="true"></i><span>Projects</span></a></li>
+          <li><a href="#services" class="nav__link"><i class="ph ph-stack" aria-hidden="true"></i><span>Services</span></a></li>
+          <li><a href="#about" class="nav__link"><i class="ph ph-user" aria-hidden="true"></i><span>About</span></a></li>
+          <li><a href="#contact" class="nav__link"><i class="ph ph-chat-circle-text" aria-hidden="true"></i><span>FAQs / Contact</span></a></li>
+        </ul>
+      </nav>
+
+      <div class="sidebar__foot">
+        <p>&copy; <span id="year">2026</span> Arbien M. Armenion.</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ================= MAIN ================= -->
+  <main id="main" class="main">
+
+    <!-- ---------- HOME / HERO ---------- -->
+    <section id="home" class="section section--hero" aria-labelledby="home-title" tabindex="-1">
+      <div class="deco deco--blob" aria-hidden="true"></div>
+      <p class="eyebrow"><i class="ph-fill ph-circle" aria-hidden="true"></i> Available for work</p>
+      <h1 id="home-title" class="display">
+        I build websites that <span class="hl">work</span>, and I test them until they <span class="hl">don't break</span>.
+      </h1>
+      <p class="lede">
+        Hi, I'm <strong>Arbien M. Armenion</strong> — a web developer who spent an internship in quality
+        assurance. That means you get clean, responsive code <em>and</em> someone who hunts down the bug
+        before your visitors ever find it.
+      </p>
+
+      <!-- ---------- TOOLS MARQUEE ---------- -->
+      <div class="toolbar">
+        <div class="toolbar__label">
+          <p class="toolbar__eyebrow">Daily drivers</p>
+          <h2 class="toolbar__title">Tools I work with</h2>
+        </div>
+
+        <div class="toolbar__rail">
+          <div class="toolbar__viewport">
+            <div class="marquee" id="marquee" role="region" aria-label="Tools and technologies I work with">
+            <ul class="marquee__track">
+              <li class="tool"><img class="tool__logo" src="assets/logos/claude.svg" alt="" width="22" height="22" /><span>Claude</span></li>
+              <li class="tool"><img class="tool__logo" src="assets/logos/codex.webp" alt="" width="22" height="22" /><span>Codex</span></li>
+              <li class="tool"><img class="tool__logo" src="assets/logos/gemini.svg" alt="" width="22" height="22" /><span>Gemini</span></li>
+              <li class="tool"><img class="tool__logo" src="assets/logos/vscode.webp" alt="" width="22" height="22" /><span>VS Code</span></li>
+              <li class="tool"><img class="tool__logo tool__logo--dim" src="assets/logos/github.svg" alt="" width="22" height="22" /><span>GitHub</span></li>
+              <li class="tool"><img class="tool__logo" src="assets/logos/git.svg" alt="" width="22" height="22" /><span>Git</span></li>
+              <li class="tool"><img class="tool__logo" src="assets/logos/figma.svg" alt="" width="22" height="22" /><span>Figma</span></li>
+              <li class="tool"><img class="tool__logo" src="assets/logos/selenium.svg" alt="" width="22" height="22" /><span>Selenium</span></li>
+              <li class="tool"><img class="tool__logo" src="assets/logos/jira.svg" alt="" width="22" height="22" /><span>Jira</span></li>
+              <li class="tool"><img class="tool__logo" src="assets/logos/postman.svg" alt="" width="22" height="22" /><span>Postman</span></li>
+              <li class="tool"><img class="tool__logo" src="assets/logos/chrome.svg" alt="" width="22" height="22" /><span>Chrome DevTools</span></li>
+              <li class="tool"><img class="tool__logo" src="assets/logos/html5.svg" alt="" width="22" height="22" /><span>HTML5</span></li>
+              <li class="tool"><img class="tool__logo tool__logo--dim" src="assets/logos/css.svg" alt="" width="22" height="22" /><span>CSS3</span></li>
+              <li class="tool"><img class="tool__logo tool__logo--pale" src="assets/logos/javascript.svg" alt="" width="22" height="22" /><span>JavaScript</span></li>
+              <li class="tool"><img class="tool__logo tool__logo--pale" src="assets/logos/react.svg" alt="" width="22" height="22" /><span>React</span></li>
+              <li class="tool"><img class="tool__logo" src="assets/logos/googlesheets.svg" alt="" width="22" height="22" /><span>Google Sheets</span></li>
+
+            </ul>
+            <!-- duplicate track for a seamless loop; hidden from screen readers -->
+            <ul class="marquee__track" aria-hidden="true">
+              <li class="tool"><img class="tool__logo" src="assets/logos/claude.svg" alt="" width="22" height="22" /><span>Claude</span></li>
+              <li class="tool"><img class="tool__logo" src="assets/logos/codex.webp" alt="" width="22" height="22" /><span>Codex</span></li>
+              <li class="tool"><img class="tool__logo" src="assets/logos/gemini.svg" alt="" width="22" height="22" /><span>Gemini</span></li>
+              <li class="tool"><img class="tool__logo" src="assets/logos/vscode.webp" alt="" width="22" height="22" /><span>VS Code</span></li>
+              <li class="tool"><img class="tool__logo tool__logo--dim" src="assets/logos/github.svg" alt="" width="22" height="22" /><span>GitHub</span></li>
+              <li class="tool"><img class="tool__logo" src="assets/logos/git.svg" alt="" width="22" height="22" /><span>Git</span></li>
+              <li class="tool"><img class="tool__logo" src="assets/logos/figma.svg" alt="" width="22" height="22" /><span>Figma</span></li>
+              <li class="tool"><img class="tool__logo" src="assets/logos/selenium.svg" alt="" width="22" height="22" /><span>Selenium</span></li>
+              <li class="tool"><img class="tool__logo" src="assets/logos/jira.svg" alt="" width="22" height="22" /><span>Jira</span></li>
+              <li class="tool"><img class="tool__logo" src="assets/logos/postman.svg" alt="" width="22" height="22" /><span>Postman</span></li>
+              <li class="tool"><img class="tool__logo" src="assets/logos/chrome.svg" alt="" width="22" height="22" /><span>Chrome DevTools</span></li>
+              <li class="tool"><img class="tool__logo" src="assets/logos/html5.svg" alt="" width="22" height="22" /><span>HTML5</span></li>
+              <li class="tool"><img class="tool__logo tool__logo--dim" src="assets/logos/css.svg" alt="" width="22" height="22" /><span>CSS3</span></li>
+              <li class="tool"><img class="tool__logo tool__logo--pale" src="assets/logos/javascript.svg" alt="" width="22" height="22" /><span>JavaScript</span></li>
+              <li class="tool"><img class="tool__logo tool__logo--pale" src="assets/logos/react.svg" alt="" width="22" height="22" /><span>React</span></li>
+              <li class="tool"><img class="tool__logo" src="assets/logos/googlesheets.svg" alt="" width="22" height="22" /><span>Google Sheets</span></li>
+
+            </ul>
+            </div>
+          </div>
+
+          <button type="button" class="toolbar__pause" id="marqueePause" aria-pressed="false" aria-label="Pause the scrolling tools list">
+            <i class="ph-bold ph-pause" aria-hidden="true"></i><span>Pause</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="hero__actions">
+        <a href="#projects" class="btn btn--primary">
+          <i class="ph-bold ph-folder-open" aria-hidden="true"></i> View my projects
+        </a>
+        <a href="#contact" class="btn btn--ghost">
+          <i class="ph-bold ph-paper-plane-tilt" aria-hidden="true"></i> Let's talk
+        </a>
+      </div>
+
+      <ul class="stats" aria-label="Highlights">
+        <li class="stat reveal">
+          <i class="ph-bold ph-code stat__icon" aria-hidden="true"></i>
+          <span class="stat__num" data-count="15">15</span><span class="stat__plus">+</span>
+          <span class="stat__label">Projects built</span>
+        </li>
+        <li class="stat reveal">
+          <i class="ph-bold ph-bug-beetle stat__icon" aria-hidden="true"></i>
+          <span class="stat__num" data-count="300">300</span><span class="stat__plus">+</span>
+          <span class="stat__label">Bugs caught &amp; reported</span>
+        </li>
+        <li class="stat reveal">
+          <i class="ph-bold ph-gauge stat__icon" aria-hidden="true"></i>
+          <span class="stat__num" data-count="100">100</span><span class="stat__plus">%</span>
+          <span class="stat__label">Responsive &amp; accessible</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ---------- PROJECTS ---------- -->
+    <section id="projects" class="section section--compact" aria-labelledby="projects-title" tabindex="-1">
+      <p class="eyebrow eyebrow--plain">Projects</p>
+      <h2 id="projects-title" class="section__title">Things I have designed, built and tested.</h2>
+      <p class="section__sub">Two live web apps and my undergraduate thesis. Open a card for the full story.</p>
+
+      <div class="pboard">
+        <p class="pgrid__hint"><i class="ph-bold ph-hand-pointing" aria-hidden="true"></i> Click a card to open it</p>
+        <div class="pgrid">
+          <button type="button" class="pcard reveal" data-modal="m-sagip">
+            <img class="pcard__img" src="assets/projects/sagip-pilipinas.webp" width="960" height="540" loading="lazy" decoding="async" alt="" />
+            <span class="pcard__label">
+              <span class="tag tag--accent">Live</span>
+              <span class="pcard__title">Sagip Pilipinas</span>
+            </span>
+          </button>
+
+          <button type="button" class="pcard reveal" data-modal="m-gourmet">
+            <img class="pcard__img" src="assets/projects/gourmet-gamble.webp" width="960" height="540" loading="lazy" decoding="async" alt="" />
+            <span class="pcard__label">
+              <span class="tag tag--accent">Live</span>
+              <span class="pcard__title">Gourmet Gamble</span>
+            </span>
+          </button>
+
+          <button type="button" class="pcard reveal" data-modal="m-tidey">
+            <img class="pcard__img" src="assets/projects/tide-y.webp" width="960" height="540" loading="lazy" decoding="async" alt="" />
+            <span class="pcard__label">
+              <span class="tag">Thesis</span>
+              <span class="pcard__title">Project TIDE-Y</span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <dialog class="pmodal" id="m-sagip" aria-labelledby="m-sagip-title">
+      <div class="pmodal__inner">
+        <button type="button" class="pmodal__close" data-close aria-label="Close project details">
+          <i class="ph-bold ph-x" aria-hidden="true"></i>
+        </button>
+            <div class="pmodal__media">
+              <img src="assets/projects/sagip-pilipinas.webp" width="960" height="540" alt="The Sagip Pilipinas home page, showing a relief appeal over photographs of volunteers." />
+            </div>
+        <div class="pmodal__body">
+          <div class="pmodal__head">
+            <span class="pcard__index">01</span>
+            <span class="tag tag--accent">Live</span>
+          </div>
+          <h3 class="pmodal__title" id="m-sagip-title">Sagip Pilipinas</h3>
+          <p class="pmodal__text">A centralised disaster-response platform. Anyone can report a calamity in their area, and volunteer groups organise around that report to send relief where it is actually needed. I built the administrative side: secure user management and the dashboards that monitor activity across the system.</p>
+          <ul class="chips" aria-label="Details"><li class="chip">Next.js</li><li class="chip">TypeScript</li><li class="chip">Tailwind CSS</li><li class="chip">Firebase</li></ul>
+          <div class="card__links">
+              <a href="https://sagip-pilipinas.vercel.app/" class="link-btn" target="_blank" rel="noopener noreferrer">Visit website <i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="pmodal" id="m-gourmet" aria-labelledby="m-gourmet-title">
+      <div class="pmodal__inner">
+        <button type="button" class="pmodal__close" data-close aria-label="Close project details">
+          <i class="ph-bold ph-x" aria-hidden="true"></i>
+        </button>
+            <div class="pmodal__media">
+              <img src="assets/projects/gourmet-gamble.webp" width="960" height="540" alt="The Gourmet Gamble home page, showing an ingredient picker and a grid of recipe cards." />
+            </div>
+        <div class="pmodal__body">
+          <div class="pmodal__head">
+            <span class="pcard__index">02</span>
+            <span class="tag tag--accent">Live</span>
+          </div>
+          <h3 class="pmodal__title" id="m-gourmet-title">Gourmet Gamble</h3>
+          <p class="pmodal__text">A recipe platform built around a reverse search: enter the ingredients you already have and it suggests what you can cook, which cuts food waste. Around that sit user profiles, a community feed, ratings and a cooking chatbot. I ran this one as Team Lead and QA Specialist, holding the documentation and the testing standard while the team shipped.</p>
+          <ul class="chips" aria-label="Details"><li class="chip">React.js</li><li class="chip">JavaScript</li><li class="chip">CSS</li><li class="chip">Reverse search</li></ul>
+          <div class="card__links">
+              <a href="https://gourmetgamble0.vercel.app/" class="link-btn" target="_blank" rel="noopener noreferrer">Visit website <i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog class="pmodal" id="m-tidey" aria-labelledby="m-tidey-title">
+      <div class="pmodal__inner">
+        <button type="button" class="pmodal__close" data-close aria-label="Close project details">
+          <i class="ph-bold ph-x" aria-hidden="true"></i>
+        </button>
+            <div class="pmodal__media pmodal__media--video">
+              <img src="assets/projects/tide-y.webp" width="960" height="540" alt="The TIDE-Y robot on a beach inside a taped boundary, with the sea behind it." />
+              <button type="button" class="video-play" data-video="zUQhAGIZhkg"
+                      data-title="Project TIDE-Y demo video"
+                      aria-label="Play the Project TIDE-Y demo video">
+                <i class="ph-fill ph-play" aria-hidden="true"></i>
+              </button>
+            </div>
+        <div class="pmodal__body">
+          <div class="pmodal__head">
+            <span class="pcard__index">03</span>
+            <span class="tag">Thesis</span>
+          </div>
+          <h3 class="pmodal__title" id="m-tidey-title">Project TIDE-Y</h3>
+          <p class="pmodal__text">A solar-powered beach-cleaning robot, built as a proof of concept against marine plastic pollution. It navigates inside a set boundary, avoids obstacles, and uses a camera with machine learning to sort plastic and glass into separate compartments. Tidal data schedules its runs for low tide.</p>
+          <ul class="chips" aria-label="Details"><li class="chip">Machine learning</li><li class="chip">Robotics</li><li class="chip">Solar power</li></ul>
+          <div class="card__links">
+              <a href="https://drive.google.com/file/d/1I1FmkaWvRnOhoqoO6nD5SPLKQfbulgZN/view?usp=sharing" class="link-btn" target="_blank" rel="noopener noreferrer">Read the paper <i class="ph-bold ph-file-pdf" aria-hidden="true"></i></a>
+              <a href="https://www.youtube.com/watch?v=zUQhAGIZhkg" class="link-btn link-btn--muted" target="_blank" rel="noopener noreferrer">Watch on YouTube <i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- ---------- SERVICES ---------- -->
+    <section id="services" class="section" aria-labelledby="services-title" tabindex="-1">
+      <p class="eyebrow eyebrow--plain">Services</p>
+      <h2 id="services-title" class="section__title">Websites, testing, fixes and upkeep.</h2>
+      <p class="section__sub">What I build, how it works, and what you get.</p>
+
+      <!-- method panel -->
+      <div class="panel reveal">
+        <div class="panel__intro">
+          <p class="panel__eyebrow">The way I work</p>
+          <h3 class="panel__title">Build. Test. Ship.<br />Always in that order.</h3>
+          <p class="panel__text">Skip the middle step and you ship bugs. I never skip the middle step.</p>
+        </div>
+
+        <ol class="steps">
+          <li class="step">
+            <div class="step__head">
+              <span class="step__icon"><i class="ph-bold ph-pen-nib" aria-hidden="true"></i></span>
+              <span class="step__num" aria-hidden="true">01</span>
+            </div>
+            <h4 class="step__title">Build.</h4>
+            <p class="step__text">Clean, semantic, responsive code written mobile-first from your content.</p>
+            <ul class="chips"><li class="chip">HTML</li><li class="chip">CSS</li><li class="chip">JS</li></ul>
+          </li>
+          <li class="step">
+            <div class="step__head">
+              <span class="step__icon"><i class="ph-bold ph-magnifying-glass" aria-hidden="true"></i></span>
+              <span class="step__num" aria-hidden="true">02</span>
+            </div>
+            <h4 class="step__title">Test.</h4>
+            <p class="step__text">Every browser, every screen size, every form. Bugs get found here, not by your customers.</p>
+            <ul class="chips"><li class="chip">Manual</li><li class="chip">Cross-browser</li><li class="chip">Reports</li></ul>
+          </li>
+          <li class="step">
+            <div class="step__head">
+              <span class="step__icon"><i class="ph-bold ph-rocket-launch" aria-hidden="true"></i></span>
+              <span class="step__num" aria-hidden="true">03</span>
+            </div>
+            <h4 class="step__title">Ship.</h4>
+            <p class="step__text">Deployed, indexed by Google, fast to load, and yours to keep.</p>
+            <ul class="chips"><li class="chip">Deploy</li><li class="chip">SEO</li><li class="chip">Handover</li></ul>
+          </li>
+        </ol>
+      </div>
+
+      <h3 class="mid-title">What I can do for you. <span>Pick one or stack a few.</span></h3>
+
+      <div class="grid grid--services">
+
+        <article class="card card--service reveal">
+          <div class="card__top">
+            <div class="card__icon card__icon--sm"><i class="ph-bold ph-code-block" aria-hidden="true"></i></div>
+            <span class="card__count">01 / 05</span>
+          </div>
+          <h4 class="card__title">Website Development</h4>
+          <p class="card__text">Custom sites built from scratch, not dragged from a template.</p>
+          <p class="badge">You own the code</p>
+          <ul class="checks">
+            <li><i class="ph-bold ph-check" aria-hidden="true"></i> Loads fast on every device</li>
+            <li><i class="ph-bold ph-check" aria-hidden="true"></i> Clean, readable source code</li>
+            <li><i class="ph-bold ph-check" aria-hidden="true"></i> Ready for search engines</li>
+          </ul>
+        </article>
+
+        <article class="card card--service reveal">
+          <div class="card__top">
+            <div class="card__icon card__icon--sm"><i class="ph-bold ph-bug-beetle" aria-hidden="true"></i></div>
+            <span class="card__count">02 / 05</span>
+          </div>
+          <h4 class="card__title">QA &amp; Manual Testing</h4>
+          <p class="card__text">I break it on purpose so your customers never do.</p>
+          <p class="badge">Internship-trained</p>
+          <ul class="checks">
+            <li><i class="ph-bold ph-check" aria-hidden="true"></i> Written test cases</li>
+            <li><i class="ph-bold ph-check" aria-hidden="true"></i> Clear bug reports with steps</li>
+            <li><i class="ph-bold ph-check" aria-hidden="true"></i> Retested after every fix</li>
+          </ul>
+        </article>
+
+        <article class="card card--service reveal">
+          <div class="card__top">
+            <div class="card__icon card__icon--sm"><i class="ph-bold ph-device-mobile" aria-hidden="true"></i></div>
+            <span class="card__count">03 / 05</span>
+          </div>
+          <h4 class="card__title">Responsive Design</h4>
+          <p class="card__text">One site that looks right on a phone, tablet and desktop.</p>
+          <p class="badge">Mobile first</p>
+          <ul class="checks">
+            <li><i class="ph-bold ph-check" aria-hidden="true"></i> No sideways scrolling, ever</li>
+            <li><i class="ph-bold ph-check" aria-hidden="true"></i> Tap targets people can hit</li>
+            <li><i class="ph-bold ph-check" aria-hidden="true"></i> Tested on real devices</li>
+          </ul>
+        </article>
+
+        <article class="card card--service reveal">
+          <div class="card__top">
+            <div class="card__icon card__icon--sm"><i class="ph-bold ph-eye" aria-hidden="true"></i></div>
+            <span class="card__count">04 / 05</span>
+          </div>
+          <h4 class="card__title">Accessibility</h4>
+          <p class="card__text">Sites that older visitors and low-vision users can actually read.</p>
+          <p class="badge">WCAG aware</p>
+          <ul class="checks">
+            <li><i class="ph-bold ph-check" aria-hidden="true"></i> Large, high-contrast type</li>
+            <li><i class="ph-bold ph-check" aria-hidden="true"></i> Full keyboard navigation</li>
+            <li><i class="ph-bold ph-check" aria-hidden="true"></i> Screen-reader friendly markup</li>
+          </ul>
+        </article>
+
+        <article class="card card--service reveal">
+          <div class="card__top">
+            <div class="card__icon card__icon--sm"><i class="ph-bold ph-wrench" aria-hidden="true"></i></div>
+            <span class="card__count">05 / 05</span>
+          </div>
+          <h4 class="card__title">Fixes &amp; Maintenance</h4>
+          <p class="card__text">Something broken or slow? I diagnose it and repair it.</p>
+          <p class="badge">Quick turnaround</p>
+          <ul class="checks">
+            <li><i class="ph-bold ph-check" aria-hidden="true"></i> Bug hunting and repair</li>
+            <li><i class="ph-bold ph-check" aria-hidden="true"></i> Speed and SEO clean-up</li>
+            <li><i class="ph-bold ph-check" aria-hidden="true"></i> Content and page updates</li>
+          </ul>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ---------- ABOUT ---------- -->
+    <section id="about" class="section section--compact" aria-labelledby="about-title" tabindex="-1">
+      <p class="eyebrow eyebrow--plain">About</p>
+      <h2 id="about-title" class="section__title">A developer who thinks like a tester.</h2>
+      <p class="section__sub">Short version: I write the code, then I try my best to break it.</p>
+
+      <div class="aboard reveal">
+        <div class="about">
+          <div class="about__bio">
+            <p>
+              I'm <strong>Arbien M. Armenion</strong>, a Computer Engineering graduate from Cebu Institute
+              of Technology &ndash; University, and I build web applications. Most of my work lives in
+              JavaScript and TypeScript, with React and Next.js on the front end and Firebase or Supabase
+              behind it.
+            </p>
+            <p>
+              Before that I spent a <strong>240-hour internship in quality assurance</strong> at Arielus
+              Software Inc. Six weeks is not long, but it rewired how I build. I spent it testing systems
+              for user data traffic capacity, writing error logs precise enough that a developer could act
+              on them without asking me a single question, and sitting with those developers while the
+              fixes landed.
+            </p>
+            <p>
+              That is the habit I kept. I write test cases before I trust a feature, I assume every input
+              field will eventually receive something ridiculous, and I check my own work the way I would
+              check someone else's. On <strong>Gourmet Gamble</strong> I did that as Team Lead and QA
+              Specialist, holding the documentation and the quality bar in place while the team shipped.
+            </p>
+            <p>
+              I am looking for a software developer role where writing the feature and hardening it are the
+              same job.
+            </p>
+          </div>
+
+          <div class="about__side">
+            <ol class="timeline" aria-label="Experience timeline">
+              <li class="tl">
+                <span class="tl__dot" aria-hidden="true"><i class="ph-fill ph-code"></i></span>
+                <p class="tl__when">Now</p>
+                <h3 class="tl__title">Software Developer</h3>
+                <p class="tl__text">
+                  Recently graduated and open to roles. Building web applications end to end, from the
+                  interface through to the database.
+                </p>
+              </li>
+              <li class="tl">
+                <span class="tl__dot" aria-hidden="true"><i class="ph-fill ph-graduation-cap"></i></span>
+                <p class="tl__when">May 2026</p>
+                <h3 class="tl__title">B.S. Computer Engineering</h3>
+                <p class="tl__text">
+                  Cebu Institute of Technology &ndash; University, Cebu City.
+                </p>
+              </li>
+              <li class="tl">
+                <span class="tl__dot" aria-hidden="true"><i class="ph-fill ph-bug-beetle"></i></span>
+                <p class="tl__when">Jun &ndash; Aug 2025</p>
+                <h3 class="tl__title">QA Intern &middot; Arielus Software Inc.</h3>
+                <p class="tl__text">
+                  A 240-hour internship. Ran capacity tests on live systems, logged defects with
+                  reproduction steps, and coordinated fixes directly with the development team.
+                </p>
+              </li>
+            </ol>
+
+            <div class="quote">
+              <i class="ph-fill ph-quotes quote__mark" aria-hidden="true"></i>
+              <blockquote>
+                <p>"It works on my machine" is not a test result.</p>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="aboard aboard--skills reveal">
+        <p class="skillgrid__head">What I work with</p>
+        <div class="skillgrid">
+          <article class="scard">
+            <span class="scard__icon"><i class="ph-bold ph-brackets-curly" aria-hidden="true"></i></span>
+            <h3 class="scard__title">Languages</h3>
+            <ol class="scard__list">
+              <li class="scard__row"><img class="scard__logo scard__logo--pale" src="assets/logos/javascript.svg" alt="" width="20" height="20" /><span class="scard__name">JavaScript</span><span class="scard__num" aria-hidden="true">01</span></li>
+              <li class="scard__row"><img class="scard__logo" src="assets/logos/typescript.svg" alt="" width="20" height="20" /><span class="scard__name">TypeScript</span><span class="scard__num" aria-hidden="true">02</span></li>
+              <li class="scard__row"><img class="scard__logo" src="assets/logos/c.svg" alt="" width="20" height="20" /><span class="scard__name">C</span><span class="scard__num" aria-hidden="true">03</span></li>
+              <li class="scard__row"><img class="scard__logo" src="assets/logos/cplusplus.svg" alt="" width="20" height="20" /><span class="scard__name">C++</span><span class="scard__num" aria-hidden="true">04</span></li>
+              <li class="scard__row"><i class="ph-bold ph-database scard__glyph" aria-hidden="true"></i><span class="scard__name">SQL</span><span class="scard__num" aria-hidden="true">05</span></li>
+              <li class="scard__row"><img class="scard__logo" src="assets/logos/html5.svg" alt="" width="20" height="20" /><span class="scard__name">HTML</span><span class="scard__num" aria-hidden="true">06</span></li>
+              <li class="scard__row"><img class="scard__logo scard__logo--dim" src="assets/logos/css.svg" alt="" width="20" height="20" /><span class="scard__name">CSS</span><span class="scard__num" aria-hidden="true">07</span></li>
+            </ol>
+          </article>
+
+          <article class="scard">
+            <span class="scard__icon"><i class="ph-bold ph-stack" aria-hidden="true"></i></span>
+            <h3 class="scard__title">Frameworks</h3>
+            <ol class="scard__list">
+              <li class="scard__row"><img class="scard__logo scard__logo--pale" src="assets/logos/react.svg" alt="" width="20" height="20" /><span class="scard__name">React.js</span><span class="scard__num" aria-hidden="true">01</span></li>
+              <li class="scard__row"><img class="scard__logo scard__logo--dim" src="assets/logos/nextdotjs.svg" alt="" width="20" height="20" /><span class="scard__name">Next.js</span><span class="scard__num" aria-hidden="true">02</span></li>
+              <li class="scard__row"><img class="scard__logo" src="assets/logos/nodedotjs.svg" alt="" width="20" height="20" /><span class="scard__name">Node.js</span><span class="scard__num" aria-hidden="true">03</span></li>
+              <li class="scard__row"><img class="scard__logo" src="assets/logos/tailwindcss.svg" alt="" width="20" height="20" /><span class="scard__name">Tailwind CSS</span><span class="scard__num" aria-hidden="true">04</span></li>
+              <li class="scard__row"><img class="scard__logo scard__logo--dim" src="assets/logos/dotnet.svg" alt="" width="20" height="20" /><span class="scard__name">.NET</span><span class="scard__num" aria-hidden="true">05</span></li>
+            </ol>
+          </article>
+
+          <article class="scard">
+            <span class="scard__icon"><i class="ph-bold ph-database" aria-hidden="true"></i></span>
+            <h3 class="scard__title">Databases</h3>
+            <ol class="scard__list">
+              <li class="scard__row"><img class="scard__logo" src="assets/logos/firebase.svg" alt="" width="20" height="20" /><span class="scard__name">Firebase</span><span class="scard__num" aria-hidden="true">01</span></li>
+              <li class="scard__row"><img class="scard__logo" src="assets/logos/supabase.svg" alt="" width="20" height="20" /><span class="scard__name">Supabase</span><span class="scard__num" aria-hidden="true">02</span></li>
+              <li class="scard__row"><i class="ph-bold ph-database scard__glyph" aria-hidden="true"></i><span class="scard__name">SQL</span><span class="scard__num" aria-hidden="true">03</span></li>
+              <li class="scard__row"><img class="scard__logo" src="assets/logos/msaccess.webp" alt="" width="20" height="20" /><span class="scard__name">MS Access</span><span class="scard__num" aria-hidden="true">04</span></li>
+            </ol>
+          </article>
+
+          <article class="scard">
+            <span class="scard__icon"><i class="ph-bold ph-wrench" aria-hidden="true"></i></span>
+            <h3 class="scard__title">Tools &amp; practice</h3>
+            <ol class="scard__list">
+              <li class="scard__row"><img class="scard__logo" src="assets/logos/git.svg" alt="" width="20" height="20" /><span class="scard__name">Git</span><span class="scard__num" aria-hidden="true">01</span></li>
+              <li class="scard__row"><img class="scard__logo scard__logo--dim" src="assets/logos/github.svg" alt="" width="20" height="20" /><span class="scard__name">GitHub</span><span class="scard__num" aria-hidden="true">02</span></li>
+              <li class="scard__row"><img class="scard__logo" src="assets/logos/vscode.webp" alt="" width="20" height="20" /><span class="scard__name">VS Code</span><span class="scard__num" aria-hidden="true">03</span></li>
+              <li class="scard__row"><img class="scard__logo" src="assets/logos/visualstudio.webp" alt="" width="20" height="20" /><span class="scard__name">Visual Studio 2022</span><span class="scard__num" aria-hidden="true">04</span></li>
+              <li class="scard__row"><i class="ph-bold ph-clipboard-text scard__glyph" aria-hidden="true"></i><span class="scard__name">Test cases</span><span class="scard__num" aria-hidden="true">05</span></li>
+              <li class="scard__row"><i class="ph-bold ph-bug-beetle scard__glyph" aria-hidden="true"></i><span class="scard__name">Bug reports</span><span class="scard__num" aria-hidden="true">06</span></li>
+            </ol>
+          </article>
+        </div>
+      </div>
+
+      <div class="about__next">
+        <p class="about__next-text">Want to see what that looks like as working software?</p>
+        <div class="about__next-links">
+          <a href="#projects" class="btn btn--primary">
+            <i class="ph-bold ph-folder-open" aria-hidden="true"></i> View the projects
+          </a>
+          <a href="#contact" class="btn btn--ghost">
+            <i class="ph-bold ph-paper-plane-tilt" aria-hidden="true"></i> Get in touch
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- CONTACT ---------- -->
+    <section id="contact" class="section section--compact" aria-labelledby="contact-title" tabindex="-1">
+      <p class="eyebrow eyebrow--plain">FAQs / Contact</p>
+      <h2 id="contact-title" class="section__title">Work worth building. Code worth trusting.</h2>
+      <p class="section__sub">Tell me what you are building and where it is breaking.</p>
+
+      <div class="qa reveal">
+        <div class="faqpanel reveal">
+          <details class="faq" open>
+            <summary class="faq__q">
+              <span class="faq__num">01</span>
+              <span class="faq__text">What do you actually build?</span>
+              <i class="ph-bold ph-caret-down faq__caret" aria-hidden="true"></i>
+            </summary>
+            <div class="faq__a"><p>Web applications, front to back. React, Next.js and TypeScript on the front end, Firebase or Supabase behind it. I also take testing-only work on builds that are already someone else's.</p></div>
+          </details>
+
+          <details class="faq">
+            <summary class="faq__q">
+              <span class="faq__num">02</span>
+              <span class="faq__text">How fast can you start?</span>
+              <i class="ph-bold ph-caret-down faq__caret" aria-hidden="true"></i>
+            </summary>
+            <div class="faq__a"><p>I am available now. A small fix or a testing pass can usually begin within a couple of days. A full build needs a short scoping conversation first, so figure on starting inside a week once we agree what it is.</p></div>
+          </details>
+
+          <details class="faq">
+            <summary class="faq__q">
+              <span class="faq__num">03</span>
+              <span class="faq__text">How much do you charge?</span>
+              <i class="ph-bold ph-caret-down faq__caret" aria-hidden="true"></i>
+            </summary>
+            <div class="faq__a"><p>It depends entirely on scope, so I quote per project rather than publish a rate. Tell me what you need and roughly when you need it, and I will come back with a fixed price and a written list of what that includes. If the scope is still fuzzy, I will suggest a small paid discovery step first so neither of us is guessing.</p></div>
+          </details>
+
+          <details class="faq">
+            <summary class="faq__q">
+              <span class="faq__num">04</span>
+              <span class="faq__text">How long do you usually reply to emails and messages?</span>
+              <i class="ph-bold ph-caret-down faq__caret" aria-hidden="true"></i>
+            </summary>
+            <div class="faq__a"><p>Within 24 hours on weekdays, and usually the same day. If a question needs a longer answer than I can give straight away, I will still acknowledge it so you are not left waiting in silence.</p></div>
+          </details>
+
+          <details class="faq">
+            <summary class="faq__q">
+              <span class="faq__num">05</span>
+              <span class="faq__text">Can you work with teams of developers?</span>
+              <i class="ph-bold ph-caret-down faq__caret" aria-hidden="true"></i>
+            </summary>
+            <div class="faq__a"><p>Yes, and I have. On Gourmet Gamble I was Team Lead and QA Specialist, aligning tasks across the team and keeping the documentation and quality standards in place. During my internship at Arielus Software Inc. I worked next to developers daily, logging defects and following each one through to its fix. I work in Git and GitHub throughout and leave handover notes, so picking up after me is not archaeology.</p></div>
+          </details>
+
+          <div class="faqpanel__foot">
+            <a class="faqpanel__mail" href="mailto:armenionarbien53@gmail.com">
+              <img class="brand-logo" src="assets/logos/gmail.svg" alt="" width="22" height="22" />
+              <span>armenionarbien53@gmail.com</span>
+            </a>
+            <ul class="socials socials--onDark" aria-label="Social links">
+              <li><a href="https://www.linkedin.com/in/arbien-armenion-782919369/" class="social" aria-label="LinkedIn profile" target="_blank" rel="noopener noreferrer"><i class="ph-fill ph-linkedin-logo brand-glyph brand-glyph--linkedin" aria-hidden="true"></i></a></li>
+              <li><a href="https://github.com/NE0FEL1S" class="social" aria-label="GitHub profile" target="_blank" rel="noopener noreferrer"><img class="brand-logo brand-logo--dim" src="assets/logos/github.svg" alt="" width="22" height="22" /></a></li>
+            </ul>
+          </div>
+        </div>
+
+        <form class="qa__form" id="contactForm" novalidate>
+          <div class="field-row">
+            <div class="field">
+              <label for="cFirst">First name</label>
+              <input type="text" id="cFirst" name="first" autocomplete="given-name" placeholder="Arbien" required aria-describedby="cFirstErr" />
+              <p class="err" id="cFirstErr" hidden><i class="ph-bold ph-warning-circle" aria-hidden="true"></i> Please enter your first name.</p>
+            </div>
+            <div class="field">
+              <label for="cLast">Last name <span class="field__hint">optional</span></label>
+              <input type="text" id="cLast" name="last" autocomplete="family-name" placeholder="Armenion" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="cEmail">Email</label>
+            <input type="email" id="cEmail" name="email" autocomplete="email" placeholder="you@yourcompany.com" required aria-describedby="cEmailErr" />
+            <p class="err" id="cEmailErr" hidden><i class="ph-bold ph-warning-circle" aria-hidden="true"></i> Please enter a valid email address.</p>
+          </div>
+
+          <div class="field field--grow">
+            <label for="cMessage">Tell me about the project</label>
+            <textarea id="cMessage" name="message" rows="6" placeholder="What are you building? What is the deadline? What is already in place?" required aria-describedby="cMessageErr"></textarea>
+            <p class="err" id="cMessageErr" hidden><i class="ph-bold ph-warning-circle" aria-hidden="true"></i> Please write a short message.</p>
+          </div>
+
+          <div class="qa__send">
+            <button type="submit" class="btn btn--primary">
+              <i class="ph-bold ph-paper-plane-tilt" aria-hidden="true"></i> Send message
+            </button>
+            <p class="form-note" role="status" id="formNote">
+              Cebu City &middot; replies within one business day.
+            </p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>&copy; <span class="year">2026</span> Arbien M. Armenion. Built by hand with HTML, CSS and JavaScript.</p>
+      <button type="button" class="to-top" id="toTop">
+        <i class="ph-bold ph-arrow-up" aria-hidden="true"></i> Back to top
+      </button>
+    </footer>
+  </main>
+
+  <!-- ================= ACCESSIBILITY WIDGET ================= -->
+  <button type="button" class="a11y-fab" id="a11yFab" aria-expanded="false" aria-controls="a11yPanel">
+    <i class="ph-bold ph-person-arms-spread" aria-hidden="true"></i><span>Accessibility options</span>
+  </button>
+
+  <div class="a11y-panel" id="a11yPanel" role="dialog" aria-label="Accessibility options" hidden>
+    <div class="a11y-panel__head">
+      <p class="a11y-panel__title">Accessibility</p>
+      <button type="button" id="a11yClose" class="a11y-close" aria-label="Close accessibility options">
+        <i class="ph-bold ph-x" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <p class="a11y-label" id="textSizeLabel">Text size</p>
+    <div class="a11y-sizes" role="group" aria-labelledby="textSizeLabel">
+      <button type="button" class="a11y-size is-active" data-scale="1"    aria-pressed="true">A</button>
+      <button type="button" class="a11y-size"           data-scale="1.25" aria-pressed="false">A+</button>
+      <button type="button" class="a11y-size"           data-scale="1.5"  aria-pressed="false">A++</button>
+    </div>
+
+    <div class="a11y-row">
+      <span class="a11y-row__text">
+        <span class="a11y-row__title" id="contrastLabel">High contrast</span>
+        <span class="a11y-row__sub">Darker text, stronger edges</span>
+      </span>
+      <button type="button" class="switch" id="contrastToggle" role="switch" aria-checked="false" aria-labelledby="contrastLabel">
+        <span class="switch__knob" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <div class="a11y-row">
+      <span class="a11y-row__text">
+        <span class="a11y-row__title" id="motionLabel">Reduce motion</span>
+        <span class="a11y-row__sub">No animation or drifting</span>
+      </span>
+      <button type="button" class="switch" id="motionToggle" role="switch" aria-checked="false" aria-labelledby="motionLabel">
+        <span class="switch__knob" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <div class="a11y-row">
+      <span class="a11y-row__text">
+        <span class="a11y-row__title" id="underlineLabel">Underline links</span>
+        <span class="a11y-row__sub">Every link gets a line</span>
+      </span>
+      <button type="button" class="switch" id="underlineToggle" role="switch" aria-checked="false" aria-labelledby="underlineLabel">
+        <span class="switch__knob" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <button type="button" class="a11y-reset" id="a11yReset">
+      <i class="ph-bold ph-arrow-counter-clockwise" aria-hidden="true"></i> Reset to default
+    </button>
+  </div>
+
+  <script src="js/script.js?v=20260909154523"></script>
+</body>
+</html>

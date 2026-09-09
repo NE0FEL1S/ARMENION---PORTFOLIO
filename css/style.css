@@ -1,0 +1,1950 @@
+/* =====================================================================
+   Arbien M. Armenion — Portfolio
+   Stack: hand-written HTML5 + CSS3 + vanilla JS
+   Font: Poppins  |  Icons: Phosphor + brand logos
+   16px base type scale. Readers who need it larger use the reading-options
+   panel, which scales every rem in this file up to 175%.
+   ===================================================================== */
+
+/* ---------------------------------------------------------------
+   1. DESIGN TOKENS
+   --------------------------------------------------------------- */
+:root {
+  /* Palette — warm cream / deep navy / coral orange */
+  --cream:        #F4F1EA;
+  --cream-2:      #EDE9DF;
+  --card:         #FFFFFF;
+  --navy:         #16213E;
+  --navy-soft:    #24345C;
+  --ink:          #2B2B33;
+  --muted:        #5C6274;
+  --accent:       #E9622B;  /* vivid brand orange — decorative fills only */
+  --accent-ink:   #B04318;  /* orange for TEXT and icons — AA on light surfaces */
+  --accent-fill:  #C24E1E;  /* orange that carries white text — AA */
+  --on-accent:    #FFFFFF;  /* text colour on --accent-fill */
+  --accent-hover: #A93F14;
+  --accent-tile:  #EE6A22;  /* lighter tile; white glyph still clears 3:1 */
+  --tray-edge:    rgba(120, 145, 205, .42);  /* so a board reads as a card */
+  --accent-soft:  #FCE5D8;
+  --accent-ring:  rgba(233, 98, 43, 0.28);
+  --blue-soft:    #DCE4F7;
+  --blue-soft-2:  #C9D6F5;
+  --border:       #E2DCCF;
+  --border-strong:#CFC7B5;
+  --shadow-sm:    0 2px 6px rgba(22, 33, 62, .06);
+  --shadow-md:    0 10px 28px rgba(22, 33, 62, .09);
+  --shadow-lg:    0 20px 48px rgba(22, 33, 62, .13);
+
+  /* Typography — 16px base. Readers who need larger text raise it with the
+     reading-options panel, which scales this whole system up to 175%. */
+  --font: "Poppins", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --fs-scale: 1;
+  --fs-2xs:  0.8125rem;   /* 13px — uppercase micro labels */
+  --fs-xs:   0.875rem;    /* 14px — card copy, chips */
+  --fs-sm:   0.9375rem;   /* 15px — nav, buttons */
+  --fs-base: 1rem;        /* 16px — body copy */
+  --fs-lg:   1.125rem;    /* 18px — lede, card titles */
+  --fs-xl:   1.375rem;    /* 22px */
+  --fs-2xl:  1.75rem;     /* 28px — section titles */
+  --fs-3xl:  2.25rem;     /* 36px */
+  --fs-4xl:  3.25rem;     /* 52px — hero */
+  --lh-body: 1.65;
+  --lh-tight: 1.15;
+
+  /* Layout */
+  --sidebar-w: 20rem;
+  --radius-sm: 10px;
+  --radius:    18px;
+  --radius-lg: 28px;
+  --gap: 1.5rem;
+  --speed: .35s;
+  /* both footers use these so their rules and text line up */
+  --footer-pad: 1rem;
+  --footer-h: 4.9rem;   /* pad + the 2.9rem back-to-top button + pad */
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --cream:        #12141C;
+  --cream-2:      #171A24;
+  --card:         #1C2030;
+  --navy:         #F2F4FA;
+  --navy-soft:    #C6CEE4;
+  --ink:          #E7E9F0;
+  --muted:        #A7AEC2;
+  --accent:       #FF8551;
+  --accent-ink:   #FF8551;
+  --accent-fill:  #FF8551;
+  --on-accent:    #16100A;
+  --accent-hover: #FFA278;
+  --accent-tile:  #FF8551;
+  --tray-edge:    rgba(130, 150, 205, .30);
+  --accent-soft:  #3A2418;
+  --accent-ring:  rgba(255, 133, 81, .35);
+  --blue-soft:    #212840;
+  --blue-soft-2:  #2A3352;
+  --border:       #2C3145;
+  --border-strong:#3C4361;
+  --shadow-sm:    0 2px 6px rgba(0, 0, 0, .3);
+  --shadow-md:    0 10px 28px rgba(0, 0, 0, .4);
+  --shadow-lg:    0 20px 48px rgba(0, 0, 0, .5);
+}
+
+/* High-contrast mode from the reading-options panel */
+[data-contrast="high"] {
+  --cream: #FFFFFF;
+  --cream-2: #FFFFFF;
+  --card: #FFFFFF;
+  --navy: #000000;
+  --navy-soft: #000000;
+  --ink: #000000;
+  --muted: #2A2A2A;
+  --accent: #8F3410;
+  --accent-ink: #8F3410;
+  --accent-fill: #8F3410;
+  --on-accent: #FFFFFF;
+  --accent-hover: #6E2708;
+  --accent-tile: #8F3410;
+  --tray-edge: #000000;
+  --accent-soft: #FFE7DA;
+  --border: #000000;
+  --border-strong: #000000;
+  --blue-soft: #F0F0F0;
+  --blue-soft-2: #E4E4E4;
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+}
+[data-theme="dark"][data-contrast="high"] {
+  --cream: #000000;
+  --cream-2: #000000;
+  --card: #000000;
+  --navy: #FFFFFF;
+  --navy-soft: #FFFFFF;
+  --ink: #FFFFFF;
+  --muted: #E4E4E4;
+  --accent: #FFB07A;
+  --accent-ink: #FFB07A;
+  --accent-fill: #FFB07A;
+  --on-accent: #000000;
+  --accent-hover: #FFC79E;
+  --accent-tile: #FFB07A;
+  --tray-edge: #FFFFFF;
+  --accent-soft: #331C0E;
+  --border: #FFFFFF;
+  --border-strong: #FFFFFF;
+}
+[data-contrast="high"] .card,
+[data-contrast="high"] .panel,
+[data-contrast="high"] .sidebar,
+[data-contrast="high"] input,
+[data-contrast="high"] textarea { border-width: 2px; }
+[data-contrast="high"] .deco { display: none; }
+
+/* ---------------------------------------------------------------
+   2. RESET & BASE
+   --------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* The hidden attribute must always win over a component's own display value */
+[hidden] { display: none !important; }
+
+html {
+  font-size: calc(17px * var(--fs-scale));
+  scroll-behavior: smooth;
+  /* Anchor landing offset is handled by .section's scroll-margin-top so there is
+     a single source of truth. On mobile this gains the sticky top bar's height. */
+  scroll-padding-top: 0;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: var(--fs-base);
+  line-height: var(--lh-body);
+  font-weight: 400;
+  color: var(--ink);
+  background: var(--cream);
+  letter-spacing: .008em;
+  -webkit-font-smoothing: antialiased;
+  transition: background var(--speed) ease, color var(--speed) ease;
+}
+
+h1, h2, h3, h4 {
+  color: var(--navy);
+  line-height: var(--lh-tight);
+  letter-spacing: -.02em;
+  margin: 0 0 .5em;
+  font-weight: 700;
+}
+
+p { margin: 0 0 1.1em; }
+a { color: var(--accent-ink); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+a:hover { color: var(--accent-hover); }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+img, svg { max-width: 100%; height: auto; display: block; }
+strong { font-weight: 600; color: var(--navy); }
+em { font-style: italic; }
+
+/* Focus: always visible, never subtle */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+::selection { background: var(--accent-fill); color: var(--on-accent); }
+
+.skip-link {
+  position: absolute;
+  left: 1rem; top: -6rem;
+  z-index: 999;
+  background: var(--navy);
+  color: #fff;
+  padding: .9rem 1.4rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  text-decoration: none;
+  transition: top .2s ease;
+}
+.skip-link:focus { top: 1rem; color: #fff; }
+
+/* ---------------------------------------------------------------
+   3. SIDEBAR
+   --------------------------------------------------------------- */
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: var(--sidebar-w);
+  background: var(--cream);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  z-index: 60;
+}
+.sidebar__inner {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 2rem 1.6rem 0;
+  gap: 1.6rem;
+}
+
+.profile { text-align: center; }
+.profile__avatar {
+  width: 8.4rem; height: 8.4rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 1.1rem;
+  overflow: hidden;
+  background: linear-gradient(150deg, var(--accent-soft), var(--blue-soft));
+  border: 3px solid var(--card);
+  box-shadow: var(--shadow-md);
+  color: var(--navy);
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+.profile__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.profile__name {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: var(--lh-tight);
+  letter-spacing: -.02em;
+  margin: 0 0 .15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  flex-wrap: wrap;
+}
+.profile__badge { color: #3B82F6; font-size: var(--fs-base); }
+.profile__handle {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  margin: 0 0 1.1rem;
+}
+
+/* real brand marks; coloured artwork cannot be recoloured on hover, so the
+   hover state lifts and tints the ring instead of inverting the button */
+.brand-logo { width: 1.35rem; height: 1.35rem; flex: none; }
+[data-theme="dark"] .brand-logo--dim { filter: brightness(0) invert(1); }
+.brand-glyph { font-size: 1.45rem; line-height: 1; }
+.brand-glyph--linkedin { color: #0A66C2; }
+[data-theme="dark"] .brand-glyph--linkedin { color: #4DA3E8; }
+
+.socials { display: flex; gap: .55rem; flex-wrap: wrap; }
+.sidebar .socials { justify-content: center; }
+.social {
+  width: 3rem; height: 3rem;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--navy);
+  font-size: var(--fs-base);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+}
+.social:hover {
+  border-color: var(--accent);
+  box-shadow: 0 8px 18px rgba(22, 33, 62, .14);
+  transform: translateY(-3px);
+}
+[data-theme="dark"] .social:hover { box-shadow: 0 8px 18px rgba(0, 0, 0, .45); }
+
+/* Nav */
+.nav { margin-top: .4rem; }
+.nav ul { display: flex; flex-direction: column; gap: .3rem; }
+.nav__link {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  padding: .85rem 1rem;
+  min-height: 3rem;
+  border-radius: 14px;
+  color: var(--navy-soft);
+  font-size: var(--fs-base);
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+}
+.nav__link i { font-size: 1.35em; color: var(--muted); transition: color .2s ease; }
+.nav__link:hover {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--navy);
+  transform: translateX(3px);
+}
+.nav__link:hover i { color: var(--accent-ink); }
+.nav__link.is-active {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--navy);
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+.nav__link.is-active i { color: var(--accent-ink); }
+
+/* same padding, same minimum height and same type as .footer, so the two
+   rules and the two copyright lines sit on identical baselines */
+.sidebar__foot {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  min-height: var(--footer-h);
+  padding: var(--footer-pad) 0;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  line-height: 1.65;
+}
+.sidebar__foot p { margin: 0; }
+
+/* Mobile top bar */
+.topbar {
+  display: none;
+  position: sticky;
+  top: 0;
+  z-index: 70;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .8rem 1.1rem;
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+}
+.topbar__name { font-weight: 600; color: var(--navy); font-size: var(--fs-sm); }
+.topbar__toggle {
+  width: 3.2rem; height: 3.2rem;
+  display: grid; place-items: center;
+  font-size: var(--fs-lg);
+  background: var(--card);
+  color: var(--navy);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+}
+.nav-scrim {
+  position: fixed; inset: 0;
+  background: rgba(12, 16, 28, .5);
+  z-index: 55;
+}
+
+/* ---------------------------------------------------------------
+   4. MAIN LAYOUT
+   --------------------------------------------------------------- */
+.main {
+  margin-left: var(--sidebar-w);
+  padding: 0 clamp(1.2rem, 4vw, 3.5rem);
+  max-width: 86rem;
+}
+
+
+/* With one view on screen at a time, short views used to sit at the top and
+   leave the leftover height dumped below the footer. The main column now fills
+   the screen, the visible view centres itself in the space above the footer,
+   and the footer sits on the bottom edge.
+   "safe center" matters: on a view taller than the screen it falls back to
+   top-aligned, so nothing gets centred out of reach above the scroll origin. */
+.js .main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.js .main > .section {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: safe center;
+}
+.js .footer { margin-top: auto; }
+
+.section {
+  position: relative;
+  padding: clamp(3rem, 7vw, 5.5rem) 0;
+  /* A jump from the nav should land on the heading, not on the section's top
+     padding. Cancelling that padding puts the eyebrow ~2rem below the top edge. */
+  scroll-margin-top: calc(2rem - clamp(3rem, 7vw, 5.5rem));
+}
+.section + .section { border-top: 1px solid var(--border); }
+/* one view at a time, so the divider between sections is meaningless.
+   Without JS the sections stack and the dividers come back. */
+.js .section + .section { border-top: 0; }
+.section:focus { outline: none; }
+/* overflow-x: clip contains the decorative blob without creating a scroll
+   container, so the sticky mobile top bar keeps working */
+.section--hero { padding-top: clamp(3rem, 8vw, 6rem); overflow-x: clip; }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: var(--fs-2xs);
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  margin: 0 0 .9rem;
+}
+.eyebrow i { font-size: .6em; color: #15803D; }
+.eyebrow--plain { color: var(--accent-ink); }
+
+.display {
+  font-size: clamp(2rem, 5vw, var(--fs-4xl));
+  font-weight: 800;
+  letter-spacing: -.03em;
+  max-width: 25ch;
+  margin-bottom: .5em;
+}
+.hl { color: var(--accent-ink); }
+
+.lede {
+  font-size: var(--fs-lg);
+  color: var(--muted);
+  max-width: 58ch;
+  line-height: 1.7;
+}
+
+.section__title {
+  font-size: clamp(1.5rem, 3.2vw, var(--fs-2xl));
+  font-weight: 800;
+  max-width: 22ch;
+  margin-bottom: .3em;
+}
+.section__sub {
+  font-size: var(--fs-base);
+  color: var(--muted);
+  max-width: 60ch;
+  margin-bottom: 2.2rem;
+}
+
+
+/* This view is built to sit on one screen, so it runs tighter than the others
+   and lets its heading use the full column width instead of wrapping. */
+.section--compact {
+  padding-top: clamp(1.2rem, 2vw, 1.8rem);
+  padding-bottom: clamp(.6rem, 1.1vw, .9rem);
+}
+.section--compact .section__title { max-width: none; }
+.section--compact .section__sub { max-width: 74ch; margin-bottom: .9rem; }
+
+/* Decorative background blob */
+.deco--blob {
+  position: absolute;
+  top: -6rem; right: -8rem;
+  width: 34rem; height: 34rem;
+  background: radial-gradient(circle at 30% 30%, var(--blue-soft-2), transparent 62%),
+              radial-gradient(circle at 70% 65%, var(--accent-soft), transparent 60%);
+  filter: blur(12px);
+  opacity: .85;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ---------------------------------------------------------------
+   5. BUTTONS
+   --------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  min-height: 3rem;
+  padding: .8rem 1.6rem;
+  border-radius: 999px;
+  font: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.btn i { font-size: 1.15em; }
+.btn--primary {
+  background: var(--accent-fill);
+  color: var(--on-accent);
+  box-shadow: 0 8px 20px var(--accent-ring);
+}
+.btn--primary:hover { background: var(--accent-hover); color: var(--on-accent); transform: translateY(-2px); }
+.btn--ghost {
+  background: var(--card);
+  color: var(--navy);
+  border-color: var(--border-strong);
+}
+.btn--ghost:hover { border-color: var(--accent); color: var(--accent-ink); transform: translateY(-2px); }
+.btn--wide { width: 100%; }
+.btn--sm { min-height: 2.9rem; padding: .6rem 1.2rem; font-size: var(--fs-xs); }
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .9rem;
+  margin: 2rem 0 2.8rem;
+}
+
+/* ---------------------------------------------------------------
+   6. STATS
+   --------------------------------------------------------------- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: var(--gap);
+}
+.stat {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.6rem;
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: center;
+  gap: 0 .55rem;
+}
+.stat__icon {
+  grid-row: 1 / span 2;
+  width: 3rem; height: 3rem;
+  display: grid; place-items: center;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  border-radius: 12px;
+  font-size: var(--fs-lg);
+  margin-right: .5rem;
+}
+.stat__num, .stat__plus {
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.1;
+}
+.stat__plus { justify-self: start; margin-left: -.35rem; color: var(--accent-ink); }
+.stat__label {
+  grid-column: 2 / -1;
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* ---------------------------------------------------------------
+   7. MARQUEE — tools I work with
+   --------------------------------------------------------------- */
+/* Two white panels — the label capsule, then the scrolling rail — sitting on a
+   soft blue gradient tray, matching the reference layout. */
+.toolbar {
+  display: flex;
+  align-items: stretch;
+  gap: .55rem;
+  margin: 1.9rem 0 0;
+  padding: .45rem;
+  border-radius: 999px;
+  background: linear-gradient(100deg,
+              var(--cream) 0%, var(--cream) 38%, var(--blue-soft-2) 100%);
+  box-shadow: 0 10px 26px rgba(22, 33, 62, .07),
+              inset 0 0 0 1px rgba(201, 214, 245, .8);
+}
+[data-theme="dark"] .toolbar {
+  box-shadow: 0 10px 26px rgba(0, 0, 0, .38),
+              inset 0 0 0 1px rgba(60, 71, 110, .8);
+}
+
+.toolbar__label {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: .55rem 1.4rem;
+  background: var(--card);
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+}
+
+.toolbar__rail {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  padding-right: .4rem;
+  background: var(--card);
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.toolbar__eyebrow {
+  margin: 0;
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  line-height: 1.3;
+}
+.toolbar__title {
+  margin: 0;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.toolbar__viewport {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.toolbar__pause {
+  position: relative;
+  flex: none;
+  width: 2.9rem; height: 2.9rem;
+  display: grid; place-items: center;
+  margin-left: .4rem;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--cream);
+  color: var(--navy);
+  font: inherit;
+  font-size: var(--fs-xs);
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.toolbar__pause:hover {
+  background: var(--accent-fill);
+  border-color: var(--accent-fill);
+  color: var(--on-accent);
+}
+/* the button is icon-only on screen; the label stays for screen readers */
+.toolbar__pause span {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.marquee {
+  display: flex;
+  gap: 0; /* spacing comes from each track's padding-right so the loop is seamless */
+  width: max-content;
+  animation: scroll-x 38s linear infinite;
+}
+.marquee:hover,
+.marquee.is-paused { animation-play-state: paused; }
+.marquee__track {
+  display: flex;
+  gap: 0; /* dividers come from each item's right border */
+}
+@keyframes scroll-x {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.tool {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  white-space: nowrap;
+  padding: .3rem 1.5rem;
+  border-right: 1px solid var(--border);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--navy);
+}
+.tool__logo {
+  width: 1.22rem;
+  height: 1.22rem;
+  flex: none;
+}
+/* keep pale marks (JavaScript yellow, React cyan) defined against white */
+.tool__logo--pale { filter: drop-shadow(0 0 .7px rgba(0, 0, 0, .5)); }
+/* near-black marks would vanish on the dark card, so flip them to white */
+[data-theme="dark"] .tool__logo--dim { filter: brightness(0) invert(1); }
+[data-theme="dark"] .tool__logo--pale { filter: none; }
+/* brands with no publicly available mark fall back to a neutral glyph */
+.tool__glyph { font-size: 1.25em; color: var(--accent-ink); }
+
+/* ---------------------------------------------------------------
+   8. CARDS & GRIDS
+   --------------------------------------------------------------- */
+.grid { display: grid; gap: var(--gap); }
+.grid--services { grid-template-columns: repeat(auto-fit, minmax(16.5rem, 1fr)); }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.7rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
+}
+.card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.card__index {
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  color: var(--border-strong);
+  line-height: 1;
+}
+.card__count {
+  font-size: var(--fs-2xs);
+  font-weight: 600;
+  letter-spacing: .1em;
+  color: var(--muted);
+}
+.card__icon {
+  width: 3.4rem; height: 3.4rem;
+  display: grid; place-items: center;
+  border-radius: 14px;
+  background: var(--accent-tile);
+  color: var(--on-accent);
+  font-size: var(--fs-lg);
+  margin-bottom: 1rem;
+}
+.card__icon--sm { margin-bottom: 0; width: 3rem; height: 3rem; font-size: var(--fs-base); }
+.card__title { font-size: var(--fs-lg); margin-bottom: .45em; }
+.card--service .card__title { font-size: var(--fs-base); text-transform: uppercase; letter-spacing: .01em; }
+.card__text { color: var(--muted); font-size: var(--fs-xs); margin-bottom: 1.1rem; }
+
+.tag {
+  font-size: var(--fs-2xs);
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: .35rem .8rem;
+  border-radius: 999px;
+  background: var(--blue-soft);
+  color: var(--navy-soft);
+}
+.tag--accent { background: var(--accent-soft); color: var(--accent-ink); }
+
+.badge {
+  align-self: flex-start;
+  display: inline-block;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  padding: .45rem .95rem;
+  border-radius: 10px;
+  margin: 0 0 1.1rem;
+}
+
+.chips { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: 1.2rem; }
+.chip {
+  font-size: var(--fs-2xs);
+  font-weight: 500;
+  color: var(--navy-soft);
+  background: var(--cream-2);
+  border: 1px solid var(--border);
+  padding: .35rem .8rem;
+  border-radius: 999px;
+}
+
+.checks { display: grid; gap: .7rem; margin-top: auto; }
+.checks li {
+  display: grid;
+  grid-template-columns: 1.6rem 1fr;
+  align-items: start;
+  gap: .5rem;
+  font-size: var(--fs-xs);
+  color: var(--ink);
+  line-height: 1.45;
+}
+.checks i {
+  color: var(--accent-ink);
+  background: var(--accent-soft);
+  border-radius: 6px;
+  width: 1.6rem; height: 1.6rem;
+  display: grid; place-items: center;
+  font-size: .85em;
+  margin-top: .12rem;
+}
+
+/* ---------------------------------------------------------------
+   PROJECTS: three cards on one screen, details in a dialog
+   --------------------------------------------------------------- */
+/* straddles the board's top edge, centred, the way the reference does it */
+.pgrid__hint {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  gap: .45rem;
+  margin: 0;
+  padding: .4rem 1rem;
+  border-radius: 999px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.pgrid__hint i { color: var(--accent-ink); font-size: 1.15em; }
+
+/* One board holding the tiles, matching the tray the FAQs and form sit on */
+.pboard {
+  /* must stay stretched: its grid uses 1fr columns, which have no intrinsic
+     width, so shrink-wrapping the board collapses the tiles to nothing */
+  position: relative;
+  margin-top: 1rem;          /* room for the pill sitting on the top edge */
+  padding: clamp(.8rem, 1.1vw, 1.1rem);
+  border: 1px solid var(--tray-edge);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(115deg, var(--card) 0%, var(--card) 38%, var(--blue-soft) 78%, var(--blue-soft-2) 100%);
+  box-shadow: 0 18px 40px rgba(22, 33, 62, .09);
+}
+[data-theme="dark"] .pboard { box-shadow: 0 18px 40px rgba(0, 0, 0, .45); }
+
+/* Three tiles across. A fourth wraps onto a second row and lines up under the
+   first, so the board grows without any re-tuning. */
+.pgrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(.8rem, 1.1vw, 1.1rem);
+}
+
+/* Each tile is the screenshot itself, with the project name laid over it. */
+.pcard {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--cream-2);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  box-shadow: var(--shadow-sm);
+  transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+}
+.pcard:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+}
+
+.pcard__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform .45s ease;
+}
+.pcard:hover .pcard__img { transform: scale(1.05); }
+
+/* the scrim keeps the white text legible whatever the screenshot underneath */
+.pcard__label {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .45rem;
+  padding: 2.6rem 1rem .9rem;
+  background: linear-gradient(to top,
+              rgba(10, 14, 26, .92) 0%,
+              rgba(10, 14, 26, .78) 38%,
+              rgba(10, 14, 26, 0) 100%);
+}
+.pcard__title {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: #fff;
+  line-height: var(--lh-tight);
+  letter-spacing: -.02em;
+}
+.pcard__label .tag {
+  background: rgba(255, 255, 255, .92);
+  color: #14203C;
+}
+
+
+
+/* ---- the details dialog ---- */
+.pmodal {
+  width: min(46rem, calc(100vw - 2rem));
+  max-height: calc(100vh - 3rem);
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  color: var(--ink);
+  overflow: hidden;
+}
+.pmodal::backdrop { background: rgba(12, 16, 28, .62); }
+.pmodal__inner { position: relative; max-height: inherit; overflow-y: auto; }
+
+.pmodal__close {
+  position: absolute;
+  top: .8rem; right: .8rem;
+  z-index: 2;
+  width: 2.75rem; height: 2.75rem;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--navy);
+  font-size: var(--fs-base);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+.pmodal__close:hover { background: var(--accent-fill); border-color: var(--accent-fill); color: var(--on-accent); }
+
+.pmodal__media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--cream-2);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.pmodal__media img,
+.pmodal__media iframe {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border: 0;
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* click-to-play poster: the YouTube player only loads when asked for */
+.video-play {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  border: 0;
+  background: rgba(12, 16, 28, .3);
+  color: #fff;
+  font-size: 1.9rem;
+  cursor: pointer;
+  transition: background .25s ease;
+}
+.video-play::before {
+  content: "";
+  position: absolute;
+  width: 4.4rem; height: 4.4rem;
+  border-radius: 50%;
+  background: var(--accent-fill);
+  box-shadow: 0 8px 24px rgba(12, 16, 28, .35);
+  transition: transform .25s ease;
+}
+.video-play i { position: relative; margin-left: .18rem; }
+.video-play:hover { background: rgba(12, 16, 28, .16); }
+.video-play:hover::before { transform: scale(1.08); }
+
+.pmodal__body { padding: clamp(1.2rem, 2.2vw, 1.8rem); }
+.pmodal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: .5rem;
+}
+.pcard__index {
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  color: var(--border-strong);
+  line-height: 1;
+}
+.pmodal__title { font-size: var(--fs-xl); margin-bottom: .4em; }
+.pmodal__text {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  line-height: 1.7;
+  margin-bottom: 1.1rem;
+}
+
+
+.card__links { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: auto; }
+.link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  min-height: 2.75rem;
+  padding: .45rem .95rem;
+  border-radius: 999px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  text-decoration: none;
+  background: var(--accent-fill);
+  color: var(--on-accent);
+  border: 2px solid var(--accent-fill);
+  transition: background .2s ease, color .2s ease;
+}
+.link-btn:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: var(--on-accent); }
+.link-btn--muted {
+  background: transparent;
+  color: var(--navy);
+  border-color: var(--border-strong);
+}
+.link-btn--muted:hover { background: var(--navy); border-color: var(--navy); color: var(--cream); }
+
+/* ---------------------------------------------------------------
+   9. METHOD PANEL (Build / Test / Ship)
+   --------------------------------------------------------------- */
+.panel {
+  background: linear-gradient(125deg, var(--accent-soft) 0%, var(--card) 38%, var(--blue-soft) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.4rem, 3vw, 2.2rem);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.6rem;
+  align-items: start;
+  margin-bottom: 3.2rem;
+}
+.panel__intro { max-width: 52ch; }
+.panel__eyebrow {
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  margin-bottom: .8rem;
+}
+.panel__title { font-size: var(--fs-xl); margin-bottom: .5em; }
+.panel__text { color: var(--muted); font-size: var(--fs-xs); margin: 0; }
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13.5rem, 1fr));
+  gap: 1rem;
+}
+.step {
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.3rem;
+}
+.step__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: .8rem;
+}
+.step__icon {
+  width: 2.9rem; height: 2.9rem;
+  display: grid; place-items: center;
+  border-radius: 12px;
+  background: var(--accent-tile);
+  color: var(--on-accent);
+  font-size: var(--fs-base);
+}
+.step__num {
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  color: var(--border);
+  line-height: 1;
+}
+.step__title { font-size: var(--fs-base); margin-bottom: .35em; }
+.step__text { font-size: var(--fs-xs); color: var(--muted); margin-bottom: .9rem; }
+.step .chips { margin-bottom: 0; }
+
+.mid-title {
+  text-align: center;
+  font-size: var(--fs-xl);
+  margin-bottom: 2rem;
+}
+.mid-title span {
+  display: block;
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  color: var(--muted);
+  letter-spacing: 0;
+  margin-top: .4rem;
+}
+
+/* ---------------------------------------------------------------
+   10. ABOUT
+   --------------------------------------------------------------- */
+.about {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 2rem;
+  align-items: start;
+}
+.about__bio {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.4rem, 3vw, 2.1rem);
+  box-shadow: var(--shadow-sm);
+}
+.about__bio p { color: var(--ink); }
+
+/* Four skill cards along the bottom of the About board, laid out like the
+   services cards: icon tile, title, then a numbered list with hairline rows. */
+/* second board of its own, so the four cards sit on the tray directly */
+.aboard--skills { margin-top: clamp(.9rem, 1.3vw, 1.3rem); }
+.skillgrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(.8rem, 1.1vw, 1.1rem);
+}
+.skillgrid__head {
+  margin: 0 .1rem .8rem;
+  font-size: var(--fs-base);
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -.01em;
+}
+
+.scard {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: .8rem .9rem .5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+  transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+/* One hover, several coordinated responses: the card lifts, the icon tips,
+   the title warms, and the rows slide in one after another. */
+.scard:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-md);
+}
+.scard:hover .scard__icon { transform: translateY(-2px) rotate(-6deg) scale(1.06); }
+.scard:hover .scard__title { color: var(--accent-ink); }
+.scard:hover .scard__row { transform: translateX(5px); }
+.scard:hover .scard__logo { transform: scale(1.15); }
+.scard:hover .scard__glyph { transform: scale(1.15); }
+.scard:hover .scard__num { color: var(--accent-ink); }
+
+.scard__row:nth-child(1) { transition-delay: 0ms; }
+.scard__row:nth-child(2) { transition-delay: 35ms; }
+.scard__row:nth-child(3) { transition-delay: 70ms; }
+.scard__row:nth-child(4) { transition-delay: 105ms; }
+.scard__row:nth-child(5) { transition-delay: 140ms; }
+.scard__row:nth-child(6) { transition-delay: 175ms; }
+.scard__row:nth-child(7) { transition-delay: 210ms; }
+.scard__icon {
+  width: 2.2rem; height: 2.2rem;
+  display: grid; place-items: center;
+  border-radius: 10px;
+  background: var(--accent-tile);
+  color: var(--on-accent);
+  font-size: var(--fs-xs);
+  margin-bottom: .45rem;
+  transition: transform .3s ease;
+}
+.scard__title {
+  margin: 0 0 .35rem;
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--navy);
+  transition: color .3s ease;
+}
+.scard__list { display: flex; flex-direction: column; }
+.scard__row {
+  display: grid;
+  grid-template-columns: 1.35rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: .45rem;
+  padding: .28rem 0;
+  border-top: 1px solid var(--border);
+  font-size: var(--fs-2xs);
+  transition: transform .3s ease;
+}
+.scard__row:first-child { border-top: 0; }
+.scard__glyph { color: var(--accent-ink); font-size: 1.15em; transition: transform .3s ease; }
+.scard__logo { width: 1.15rem; height: 1.15rem; justify-self: center; transition: transform .3s ease; }
+/* near-black marks would vanish on the dark card */
+[data-theme="dark"] .scard__logo--dim { filter: brightness(0) invert(1); }
+/* very pale marks need an edge to read on white */
+.scard__logo--pale { filter: drop-shadow(0 0 .7px rgba(0, 0, 0, .55)); }
+[data-theme="dark"] .scard__logo--pale { filter: none; }
+.scard__name {
+  font-weight: 600;
+  color: var(--navy);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.scard__num { font-weight: 700; color: var(--border-strong); font-variant-numeric: tabular-nums; transition: color .3s ease; }
+
+/* the four cards fall to two, then one */
+@media (max-width: 1080px) { .skillgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px)  { .skillgrid { grid-template-columns: minmax(0, 1fr); } }
+
+/* One board holding the three about cards, same tray as Projects and FAQs */
+.aboard {
+  padding: clamp(1rem, 1.5vw, 1.5rem);
+  border: 1px solid var(--tray-edge);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(115deg, var(--card) 0%, var(--card) 38%, var(--blue-soft) 78%, var(--blue-soft-2) 100%);
+  box-shadow: 0 18px 40px rgba(22, 33, 62, .09);
+}
+[data-theme="dark"] .aboard { box-shadow: 0 18px 40px rgba(0, 0, 0, .45); }
+.aboard .about { gap: clamp(.9rem, 1.3vw, 1.3rem); }
+.aboard .about__side { gap: clamp(.9rem, 1.3vw, 1.3rem); }
+
+.about__side { display: grid; gap: 1.5rem; }
+.timeline {
+  display: grid;
+  gap: 1.6rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.8rem 1.6rem 1.8rem 1.4rem;
+  box-shadow: var(--shadow-sm);
+}
+.tl {
+  position: relative;
+  padding-left: 3.4rem;
+}
+.tl::before {
+  content: "";
+  position: absolute;
+  left: 1.35rem; top: 2.9rem; bottom: -1.6rem;
+  width: 2px;
+  background: var(--border);
+}
+.tl:last-child::before { display: none; }
+.tl__dot {
+  position: absolute;
+  left: 0; top: .2rem;
+  width: 2.7rem; height: 2.7rem;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  font-size: var(--fs-sm);
+}
+.tl__when {
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  margin: 0 0 .2rem;
+}
+.tl__title { font-size: var(--fs-base); margin-bottom: .25em; }
+.tl__text { font-size: var(--fs-xs); color: var(--muted); margin: 0; }
+
+.about__next {
+  margin-top: .5rem;
+  padding-top: .5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.about__next-text {
+  margin: 0;
+  font-size: var(--fs-base);
+  font-weight: 600;
+  color: var(--navy);
+}
+.about__next-links { display: flex; flex-wrap: wrap; gap: .8rem; }
+
+.quote {
+  position: relative;
+  background: var(--navy);
+  color: var(--cream);
+  border-radius: var(--radius-lg);
+  padding: 1.8rem 1.6rem;
+}
+[data-theme="dark"] .quote { background: var(--cream-2); border: 1px solid var(--border); }
+.quote__mark { font-size: var(--fs-2xl); color: var(--accent-ink); display: block; margin-bottom: .4rem; }
+.quote blockquote { margin: 0; }
+.quote p {
+  margin: 0;
+  font-size: var(--fs-base);
+  font-weight: 600;
+  line-height: 1.5;
+  color: inherit;
+}
+[data-theme="dark"] .quote p { color: var(--navy); }
+
+/* ---------------------------------------------------------------
+   11. CONTACT
+   --------------------------------------------------------------- */
+/* FAQs and the form share one tray, dark panel left, form right */
+.qa {
+  display: grid;
+  grid-template-columns: minmax(0, 1.06fr) minmax(0, .94fr);
+  gap: clamp(.6rem, .9vw, .9rem);
+  align-items: stretch;
+  padding: clamp(.6rem, .9vw, .9rem);
+  border: 1px solid var(--tray-edge);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(115deg, var(--card) 0%, var(--card) 38%, var(--blue-soft) 78%, var(--blue-soft-2) 100%);
+  box-shadow: 0 18px 40px rgba(22, 33, 62, .09);
+}
+[data-theme="dark"] .qa { box-shadow: 0 18px 40px rgba(0, 0, 0, .45); }
+
+.qa .faqpanel { max-width: none; margin: 0; height: 100%; }
+
+.qa__form {
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.1rem, 1.7vw, 1.5rem);
+  box-shadow: var(--shadow-sm);
+}
+/* the message box absorbs whatever height is left over, so the two panels end
+   level without leaving a dead gap above the button */
+.qa__form .field--grow { flex: 1 1 auto; display: flex; flex-direction: column; }
+.qa__form .field--grow textarea { flex: 1 1 auto; min-height: 8rem; resize: vertical; }
+.qa__form .qa__send { padding-top: .8rem; }
+
+/* the form is what sets this view's height, so it runs a little tighter here */
+.qa__form .field { margin-bottom: .72rem; }
+.qa__form .field input,
+.qa__form .field textarea { min-height: 3rem; }
+.qa__form .field--grow textarea { min-height: 5.5rem; }
+.qa__form .field label { margin-bottom: .25rem; }
+
+.field-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 0 1rem;
+}
+.field__hint {
+  margin-left: .4rem;
+  font-size: var(--fs-2xs);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+.field__hint::before { content: "("; }
+.field__hint::after  { content: ")"; }
+
+.qa__send {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .8rem 1.1rem;
+  margin-top: .4rem;
+}
+.qa__send .form-note { margin: 0; text-align: left; }
+
+.contact {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 2rem;
+  align-items: start;
+}
+.contact__form {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.4rem, 3vw, 2.1rem);
+  box-shadow: var(--shadow-sm);
+}
+.field { margin-bottom: 1.3rem; }
+.field label {
+  display: block;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: .5rem;
+}
+.field input,
+.field textarea {
+  width: 100%;
+  font: inherit;
+  font-size: var(--fs-sm);
+  color: var(--ink);
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  padding: .85rem 1rem;
+  min-height: 3.3rem;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.field textarea { resize: vertical; line-height: 1.6; }
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-ring);
+}
+.field input[aria-invalid="true"],
+.field textarea[aria-invalid="true"] { border-color: #D92D20; }
+.err {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  color: #D92D20;
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  margin: .5rem 0 0;
+}
+[data-theme="dark"] .err { color: #FF8A80; }
+.form-note {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  margin: 1rem 0 0;
+  text-align: center;
+}
+.form-note.is-ok { color: #15803D; font-weight: 600; }
+[data-theme="dark"] .form-note.is-ok { color: #6EE7A8; }
+
+.contact__side { display: grid; gap: 1.5rem; }
+.contact__list {
+  display: grid;
+  gap: 1.3rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.8rem 1.35rem;
+  box-shadow: var(--shadow-sm);
+}
+.contact__list li {
+  display: grid;
+  grid-template-columns: 2.7rem minmax(0, 1fr);
+  gap: .2rem .75rem;
+  align-items: center;
+}
+.contact__ico {
+  grid-row: 1 / span 2;
+  width: 2.7rem; height: 2.7rem;
+  display: grid; place-items: center;
+  border-radius: 12px;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  font-size: var(--fs-base);
+}
+.contact__label {
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.contact__value, .contact__list a {
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--navy);
+  overflow-wrap: anywhere;
+}
+.contact__list a { color: var(--accent-ink); }
+
+.cta {
+  background: linear-gradient(130deg, var(--blue-soft), var(--accent-soft));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.8rem 1.6rem;
+}
+.cta__title { font-size: var(--fs-base); margin-bottom: .3em; }
+.cta__text { font-size: var(--fs-xs); color: var(--muted); }
+.cta__links { display: flex; flex-wrap: wrap; gap: .7rem; }
+
+/* ---------------------------------------------------------------
+   12. FOOTER
+   --------------------------------------------------------------- */
+.footer {
+  border-top: 1px solid var(--border);
+  min-height: var(--footer-h);
+  padding: var(--footer-pad) 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.footer p { margin: 0; font-size: var(--fs-xs); color: var(--muted); }
+.to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  min-height: 2.9rem;
+  padding: .5rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: var(--card);
+  color: var(--navy);
+  font: inherit;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+.to-top:hover { border-color: var(--accent); color: var(--accent-ink); }
+
+/* ---------------------------------------------------------------
+   13. ACCESSIBILITY WIDGET
+   --------------------------------------------------------------- */
+/* Floating circle, horizontally centred on the sidebar's width and sitting
+   just above the sidebar copyright. It lives outside the sidebar in the markup
+   so the drawer's transform cannot carry it off-screen on mobile. */
+.a11y-fab {
+  position: fixed;
+  z-index: 80;
+  left: calc(var(--sidebar-w) / 2);
+  bottom: calc(var(--footer-h) + 1rem);
+  transform: translateX(-50%);
+  width: 3.6rem; height: 3.6rem;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--navy);
+  color: var(--cream);
+  border: none;
+  font-size: var(--fs-lg);
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: transform .2s ease, background .2s ease;
+}
+/* the label stays for screen readers and gives the button its name */
+.a11y-fab span {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.a11y-fab:hover {
+  background: var(--accent-fill);
+  color: #fff;
+  transform: translateX(-50%) scale(1.06);
+}
+
+/* Dark control panel, matching the reference. Stays dark in both themes since
+   it reads as a distinct utility rather than part of the page. */
+.a11y-panel {
+  position: fixed;
+  left: 1.2rem;
+  bottom: calc(var(--footer-h) + 5.2rem);
+  z-index: 85;
+  width: min(21rem, calc(100vw - 2.4rem));
+  padding: 1.1rem;
+  border-radius: var(--radius);
+  background: #14203C;
+  border: 1px solid rgba(255, 255, 255, .1);
+  box-shadow: 0 24px 60px rgba(6, 12, 26, .45);
+}
+
+.a11y-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.a11y-panel__title {
+  margin: 0;
+  font-size: var(--fs-base);
+  font-weight: 700;
+  color: #fff;
+}
+.a11y-close {
+  width: 2.4rem; height: 2.4rem;
+  display: grid; place-items: center;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .08);
+  border: 1px solid rgba(255, 255, 255, .14);
+  color: #fff;
+  font-size: var(--fs-xs);
+  cursor: pointer;
+}
+.a11y-close:hover { background: rgba(255, 255, 255, .16); }
+
+.a11y-label {
+  margin: 0 0 .5rem;
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .55);
+}
+
+/* three fixed steps instead of a running percentage */
+.a11y-sizes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .55rem;
+  margin-bottom: 1.1rem;
+}
+.a11y-size {
+  min-height: 2.9rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, .16);
+  background: rgba(255, 255, 255, .05);
+  color: #fff;
+  font: inherit;
+  font-weight: 800;
+  letter-spacing: .02em;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+.a11y-size:nth-child(2) { font-size: 1.1em; }
+.a11y-size:nth-child(3) { font-size: 1.25em; }
+.a11y-size:hover { background: rgba(255, 255, 255, .12); }
+.a11y-size.is-active {
+  background: #F2701F;
+  border-color: #F2701F;
+  color: #fff;
+}
+
+.a11y-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .7rem 0;
+}
+.a11y-row__text { display: flex; flex-direction: column; gap: .1rem; }
+.a11y-row__title { font-size: var(--fs-xs); font-weight: 700; color: #fff; }
+.a11y-row__sub { font-size: var(--fs-2xs); color: rgba(255, 255, 255, .55); }
+
+.switch {
+  position: relative;
+  flex: none;
+  width: 3.2rem; height: 1.8rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .18);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background .2s ease;
+}
+.switch[aria-checked="true"] { background: #F2701F; }
+.switch__knob {
+  position: absolute;
+  top: .2rem; left: .2rem;
+  width: 1.4rem; height: 1.4rem;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform .2s ease;
+}
+.switch[aria-checked="true"] .switch__knob { transform: translateX(1.4rem); }
+
+.a11y-reset {
+  width: 100%;
+  margin-top: .9rem;
+  min-height: 3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .12);
+  color: rgba(255, 255, 255, .78);
+  font: inherit;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease;
+}
+.a11y-reset:hover { background: rgba(255, 255, 255, .14); color: #fff; }
+
+/* links get an underline only when the visitor asks for it */
+[data-underline="on"] a { text-decoration: underline; }
+
+
+/* ---------------------------------------------------------------
+   14. SCROLL REVEAL
+   --------------------------------------------------------------- */
+/* Scoped to .js so content is never hidden when JavaScript is off or fails */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.js .reveal.is-visible { opacity: 1; transform: none; }
+
+/* ---------------------------------------------------------------
+   15. RESPONSIVE
+   --------------------------------------------------------------- */
+@media (max-width: 1080px) {
+  .about, .contact { grid-template-columns: 1fr; }
+  .qa { grid-template-columns: 1fr; }
+  .panel { grid-template-columns: 1fr; }
+}
+
+/* the tiles are square-ish, so they fall to two across then one */
+@media (max-width: 900px) {
+  .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .pgrid { grid-template-columns: minmax(0, 1fr); }
+  .pcard { aspect-ratio: 16 / 10; }
+}
+
+/* the two panels stack so each gets a full row */
+@media (max-width: 760px) {
+  .toolbar {
+    flex-direction: column;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(150deg,
+                var(--cream) 0%, var(--cream) 38%, var(--blue-soft-2) 100%);
+  }
+  .toolbar__label { border-radius: var(--radius); padding: .8rem 1.2rem; }
+  .toolbar__rail { border-radius: var(--radius); }
+  .tool { padding: .3rem 1.1rem; }
+}
+
+@media (max-width: 900px) {
+  /* keep anchor jumps clear of the sticky top bar */
+  html { scroll-padding-top: 4.9rem; }
+  /* the top bar is in flow, so main gets the rest of the screen, not all of it */
+  .js .main { min-height: calc(100vh - 4.9rem); }
+  /* the sidebar is off-canvas from here, so the circle takes the usual corner */
+  .a11y-fab { left: auto; right: 1rem; bottom: 1rem; transform: none; }
+  .a11y-fab:hover { transform: scale(1.06); }
+  .a11y-panel { left: auto; right: 1rem; bottom: 5.6rem; }
+  .topbar { display: flex; }
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform .3s ease;
+    width: min(20rem, 86vw);
+    box-shadow: var(--shadow-lg);
+  }
+  .sidebar.is-open { transform: none; }
+  .main { margin-left: 0; padding-bottom: 2rem; }
+  .display { max-width: none; }
+}
+
+@media (max-width: 560px) {
+  .card, .about__bio, .contact__form { padding: 1.3rem; }
+  .footer { flex-direction: column; align-items: flex-start; }
+}
+
+/* ---------------------------------------------------------------
+   16. MOTION & PRINT
+   --------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .js .reveal { opacity: 1; transform: none; }
+}
+
+[data-motion="reduced"] .marquee { animation-play-state: paused; }
+[data-motion="reduced"] .reveal { opacity: 1 !important; transform: none !important; }
+[data-motion="reduced"] * { transition-duration: .001ms !important; }
+[data-motion="reduced"] .card:hover { transform: none; }
+[data-motion="reduced"] .scard:hover,
+[data-motion="reduced"] .scard:hover .scard__row,
+[data-motion="reduced"] .scard:hover .scard__icon,
+[data-motion="reduced"] .scard:hover .scard__logo,
+[data-motion="reduced"] .scard:hover .scard__glyph { transform: none; }
+
+@media print {
+  .sidebar, .topbar, .a11y-fab, .a11y-panel, .toolbar, .to-top, .nav-scrim { display: none !important; }
+  .main { margin: 0; max-width: none; }
+  body { background: #fff; color: #000; }
+  .js .reveal { opacity: 1; transform: none; }
+}
+
+/* ---------------------------------------------------------------
+   17. FAQs
+   Built on <details>/<summary>, so it opens by keyboard, is
+   announced correctly, and still works with JavaScript off.
+   --------------------------------------------------------------- */
+.faqpanel {
+  /* the panel is stretched to match the form, so pin the contact row to the
+     bottom and let the slack fall above it rather than below */
+  display: flex;
+  flex-direction: column;
+  background: var(--navy);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.1rem, 2vw, 1.6rem);
+  max-width: 60rem;
+  box-shadow: var(--shadow-md);
+}
+[data-theme="dark"] .faqpanel {
+  background: var(--cream-2);
+  border: 1px solid var(--border);
+}
+
+.faq { border-top: 1px solid rgba(255, 255, 255, .14); }
+.faq:first-of-type { border-top: 0; }
+[data-theme="dark"] .faq { border-top-color: var(--border); }
+
+.faq__q {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr 1.6rem;
+  align-items: center;
+  gap: .6rem;
+  padding: .5rem 0;
+  cursor: pointer;
+  list-style: none;
+  font-size: var(--fs-base);
+  font-weight: 700;
+  color: #fff;
+  transition: color var(--speed) ease;
+}
+[data-theme="dark"] .faq__q { color: var(--navy); }
+.faq__q::-webkit-details-marker { display: none; }
+.faq__q:hover .faq__text { color: var(--accent); }
+.faq[open] .faq__text { color: var(--accent); }
+
+.faq__num {
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  letter-spacing: .04em;
+  color: var(--accent);
+}
+.faq__text { transition: color var(--speed) ease; }
+.faq__caret {
+  justify-self: end;
+  font-size: var(--fs-base);
+  color: var(--accent);
+  transition: transform var(--speed) ease;
+}
+.faq[open] .faq__caret { transform: rotate(180deg); }
+
+.faq__a {
+  padding: 0 1.2rem .75rem 3rem;
+  animation: faq-open .3s ease;
+}
+.faq__a p {
+  margin: 0;
+  font-size: var(--fs-xs);
+  line-height: 1.62;
+  color: rgba(255, 255, 255, .72);
+}
+[data-theme="dark"] .faq__a p { color: var(--muted); }
+@keyframes faq-open {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.faqpanel__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-top: auto;
+  padding-top: .9rem;
+  border-top: 1px solid rgba(255, 255, 255, .14);
+}
+[data-theme="dark"] .faqpanel__foot { border-top-color: var(--border); }
+
+.faqpanel__mail {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  min-height: 3rem;
+  padding: .6rem 1.3rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .07);
+  border: 1px solid rgba(255, 255, 255, .16);
+  color: #fff;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.faqpanel__mail:hover { background: rgba(255, 255, 255, .13); color: #fff; }
+[data-theme="dark"] .faqpanel__mail {
+  background: var(--card);
+  border-color: var(--border);
+  color: var(--navy);
+}
+[data-theme="dark"] .faqpanel__mail:hover { color: var(--navy); }
+
+.socials--onDark { margin-left: auto; }
+.socials--onDark .social {
+  background: rgba(255, 255, 255, .95);
+  border-color: transparent;
+}
+[data-theme="dark"] .socials--onDark .social { background: var(--card); border-color: var(--border); }
+
+@media (prefers-reduced-motion: reduce) {
+  .faq__a { animation: none; }
+}
+
+@media (max-width: 560px) {
+  .faq__q { grid-template-columns: 2rem 1fr 1.4rem; font-size: var(--fs-sm); }
+  .faq__a { padding-left: 2.6rem; padding-right: 0; }
+  .socials--onDark { margin-left: 0; }
+}

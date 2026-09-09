@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Replace https://arbienarmenion.com/ with your live domain after deploying.
+     The site is one document whose sections are swapped by the navigation, so
+     there is a single URL to submit. Fragment links such as #projects are not
+     separate pages to a crawler and do not belong in a sitemap. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://arbienarmenion.com/</loc>
+    <lastmod>2026-09-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
