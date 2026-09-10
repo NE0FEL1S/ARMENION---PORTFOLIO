@@ -164,14 +164,6 @@
     showView("home", { focus: false });
   }
 
-  /* the footer link scrolls the current view rather than leaving it */
-  const toTop = $("#toTop");
-  if (toTop) {
-    toTop.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  }
-
   /* -----------------------------------------------------------------
      6. REVEAL ON SCROLL
      ----------------------------------------------------------------- */
@@ -192,39 +184,10 @@
   }
 
   /* -----------------------------------------------------------------
-     7. COUNT-UP STATS
+     7. MOTION PREFERENCE
+     Read once here; the reading-options panel below uses it too.
      ----------------------------------------------------------------- */
-  const counters = $$(".stat__num");
   const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-  function countUp(el) {
-    const target = Number(el.dataset.count || 0);
-    if (reducedMotionQuery.matches || root.getAttribute("data-motion") === "reduced") {
-      el.textContent = String(target);
-      return;
-    }
-    const duration = 1300;
-    const start = performance.now();
-    function tick(now) {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = String(Math.round(target * eased));
-      if (progress < 1) requestAnimationFrame(tick);
-    }
-    el.textContent = "0";
-    requestAnimationFrame(tick);
-  }
-
-  if ("IntersectionObserver" in window && counters.length) {
-    const countObserver = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        countUp(entry.target);
-        obs.unobserve(entry.target);
-      });
-    }, { threshold: 0.5 });
-    counters.forEach(c => countObserver.observe(c));
-  }
 
   /* -----------------------------------------------------------------
      8. MARQUEE PAUSE CONTROL

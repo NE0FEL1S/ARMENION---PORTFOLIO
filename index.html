@@ -46,7 +46,7 @@
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css" />
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
 
-  <link rel="stylesheet" href="css/style.css?v=20260909154523" />
+  <link rel="stylesheet" href="css/style.css?v=1789044104" />
 
   <!-- Marks that JS is running, so scroll-reveal only hides content it can bring back -->
   <script>document.documentElement.className += " js";</script>
@@ -153,15 +153,23 @@
     <!-- ---------- HOME / HERO ---------- -->
     <section id="home" class="section section--hero" aria-labelledby="home-title" tabindex="-1">
       <div class="deco deco--blob" aria-hidden="true"></div>
-      <p class="eyebrow"><i class="ph-fill ph-circle" aria-hidden="true"></i> Available for work</p>
-      <h1 id="home-title" class="display">
-        I build websites that <span class="hl">work</span>, and I test them until they <span class="hl">don't break</span>.
-      </h1>
-      <p class="lede">
-        Hi, I'm <strong>Arbien M. Armenion</strong> — a web developer who spent an internship in quality
-        assurance. That means you get clean, responsive code <em>and</em> someone who hunts down the bug
-        before your visitors ever find it.
-      </p>
+
+      <div class="hero__head">
+        <div class="hero__copy">
+          <p class="eyebrow"><i class="ph-fill ph-circle" aria-hidden="true"></i> Available for work</p>
+          <h1 id="home-title" class="display">
+            I build websites that <span class="hl">work</span>, and I test them until they <span class="hl">don't break</span>.
+          </h1>
+          <p class="lede">
+            Hi, I'm <strong>Arbien M. Armenion</strong> — a web developer who spent an internship in quality
+            assurance. That means you get clean, responsive code <em>and</em> someone who hunts down the bug
+            before your visitors ever find it.
+          </p>
+        </div>
+        <a href="#contact" class="home__cta">
+          Get in touch <i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i>
+        </a>
+      </div>
 
       <!-- ---------- TOOLS MARQUEE ---------- -->
       <div class="toolbar">
@@ -221,32 +229,157 @@
         </div>
       </div>
 
-      <div class="hero__actions">
-        <a href="#projects" class="btn btn--primary">
-          <i class="ph-bold ph-folder-open" aria-hidden="true"></i> View my projects
+      <!-- ---------- BENTO BOARD ----------
+           Six cards, four columns: Projects and Booking process each take two.
+           Every card is a link into the view it previews. -->
+      <div class="bento reveal">
+
+        <a href="#projects" class="bento__card bento__card--wide bento__card--shots" aria-label="Projects">
+          <div class="bento__body">
+            <div class="bento__head">
+              <span class="bento__icon"><i class="ph-bold ph-folder-open" aria-hidden="true"></i></span>
+              <h2 class="bento__title">Projects</h2>
+            </div>
+            <p class="bento__text">Two live web apps and a thesis, built and tested end to end.</p>
+            <p class="bento__hint"><i class="ph-bold ph-cursor-click" aria-hidden="true"></i> Hover to flip through</p>
+          </div>
+
+          <!-- the deck cycles only while the card is hovered or focused -->
+          <div class="shots" aria-hidden="true">
+            <img class="shot" style="--i:0" src="assets/projects/sagip-pilipinas.webp" alt="" width="960" height="540" loading="lazy" decoding="async" />
+            <img class="shot" style="--i:1" src="assets/projects/gourmet-gamble.webp" alt="" width="960" height="540" loading="lazy" decoding="async" />
+            <img class="shot" style="--i:2" src="assets/projects/tide-y.webp" alt="" width="960" height="540" loading="lazy" decoding="async" />
+          </div>
         </a>
-        <a href="#contact" class="btn btn--ghost">
-          <i class="ph-bold ph-paper-plane-tilt" aria-hidden="true"></i> Let's talk
+
+        <a href="#about" class="bento__card bento__card--about" aria-label="About">
+          <div class="bento__head">
+            <span class="bento__icon"><i class="ph-bold ph-user" aria-hidden="true"></i></span>
+            <h2 class="bento__title">About</h2>
+          </div>
+          <p class="bento__text">Who I am and how I work.</p>
+          <span class="plates" aria-hidden="true">
+            <span class="plate plate--back"></span>
+            <span class="plate plate--mid"></span>
+            <img class="plate plate--front" src="assets/profile.jpg" alt="" width="400" height="400" loading="lazy" decoding="async" />
+          </span>
         </a>
+
+        <a href="#about" class="bento__card" aria-label="AI tools proficiency">
+          <div class="bento__head">
+            <span class="bento__icon"><i class="ph-bold ph-sparkle" aria-hidden="true"></i></span>
+            <h2 class="bento__title">AI tools proficiency</h2>
+          </div>
+          <p class="bento__text">What I reach for while building.</p>
+          <ul class="ailist">
+            <li class="ai">
+              <img class="ai__logo" src="assets/logos/claude.svg" alt="" width="18" height="18" />
+              <span class="ai__name">Claude</span>
+              <span class="ai__meter"><i class="on"></i><i class="on"></i><i class="on"></i></span>
+              <span class="ai__level">Daily</span>
+            </li>
+            <li class="ai">
+              <img class="ai__logo ai__logo--dim" src="assets/logos/openai.svg" alt="" width="18" height="18" />
+              <span class="ai__name">ChatGPT</span>
+              <span class="ai__meter"><i class="on"></i><i class="on"></i><i class="on"></i></span>
+              <span class="ai__level">Daily</span>
+            </li>
+            <li class="ai">
+              <img class="ai__logo" src="assets/logos/gemini.svg" alt="" width="18" height="18" />
+              <span class="ai__name">Gemini</span>
+              <span class="ai__meter"><i class="on"></i><i class="on"></i><i></i></span>
+              <span class="ai__level">Often</span>
+            </li>
+            <li class="ai">
+              <img class="ai__logo" src="assets/logos/deepseek.svg" alt="" width="18" height="18" />
+              <span class="ai__name">DeepSeek</span>
+              <span class="ai__meter"><i class="on"></i><i class="on"></i><i></i></span>
+              <span class="ai__level">Often</span>
+            </li>
+            <li class="ai">
+              <!-- xAI publishes no openly licensed Grok mark, so this one is a glyph -->
+              <span class="ai__logo ai__logo--glyph"><i class="ph-bold ph-lightning" aria-hidden="true"></i></span>
+              <span class="ai__name">Grok</span>
+              <span class="ai__meter"><i class="on"></i><i></i><i></i></span>
+              <span class="ai__level">Trying</span>
+            </li>
+          </ul>
+        </a>
+
+        <a href="#contact" class="bento__card" aria-label="Frequently asked questions">
+          <div class="bento__head">
+            <span class="bento__icon"><i class="ph-bold ph-question" aria-hidden="true"></i></span>
+            <h2 class="bento__title">Frequently asked questions</h2>
+          </div>
+          <p class="bento__text">The five I get asked most.</p>
+          <ul class="qlist">
+            <li class="q"><span>What do you build?</span><i class="ph-bold ph-caret-right" aria-hidden="true"></i></li>
+            <li class="q"><span>How fast can you start?</span><i class="ph-bold ph-caret-right" aria-hidden="true"></i></li>
+            <li class="q"><span>What do you charge?</span><i class="ph-bold ph-caret-right" aria-hidden="true"></i></li>
+            <li class="q"><span>How fast do you reply?</span><i class="ph-bold ph-caret-right" aria-hidden="true"></i></li>
+            <li class="q"><span>Can you join a team?</span><i class="ph-bold ph-caret-right" aria-hidden="true"></i></li>
+          </ul>
+        </a>
+
+        <a href="#services" class="bento__card" aria-label="Services">
+          <div class="bento__head">
+            <span class="bento__icon"><i class="ph-bold ph-stack" aria-hidden="true"></i></span>
+            <h2 class="bento__title">Services</h2>
+          </div>
+          <p class="bento__text">What I build for clients.</p>
+          <ul class="slist">
+            <li class="srow"><i class="ph-bold ph-browsers" aria-hidden="true"></i><span>Websites</span><em>01</em></li>
+            <li class="srow"><i class="ph-bold ph-bug-beetle" aria-hidden="true"></i><span>QA &amp; testing</span><em>02</em></li>
+            <li class="srow"><i class="ph-bold ph-devices" aria-hidden="true"></i><span>Responsive design</span><em>03</em></li>
+            <li class="srow"><i class="ph-bold ph-eye" aria-hidden="true"></i><span>Accessibility</span><em>04</em></li>
+            <li class="srow"><i class="ph-bold ph-wrench" aria-hidden="true"></i><span>Fixes &amp; upkeep</span><em>05</em></li>
+          </ul>
+        </a>
+
+        <a href="#services" class="bento__card bento__card--wide bento__card--steps" aria-label="Booking process">
+          <div class="bento__body">
+            <div class="bento__head">
+              <span class="bento__icon"><i class="ph-bold ph-calendar-check" aria-hidden="true"></i></span>
+              <h2 class="bento__title">Booking process</h2>
+            </div>
+            <p class="bento__text">One form, then every step to a finished project. Nothing hidden.</p>
+            <p class="bento__hint"><i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i> See the full workflow</p>
+          </div>
+
+          <!-- a miniature of the Services flow rather than a list of the
+               same words: two rows of stages wired together, with the same
+               running dots and the same colour for the finish -->
+          <div class="miniflow" aria-hidden="true">
+            <span class="mf__row">
+              <span class="mf__n mf__n--start"><i class="ph-bold ph-note-pencil"></i></span>
+              <span class="mf__w"><i class="mf__d" style="--d:0s"></i></span>
+              <span class="mf__n"><i class="ph-bold ph-paper-plane-tilt"></i></span>
+              <span class="mf__w"><i class="mf__d" style="--d:.4s"></i></span>
+              <span class="mf__n"><i class="ph-bold ph-calendar-check"></i></span>
+              <span class="mf__w"><i class="mf__d" style="--d:.8s"></i></span>
+              <span class="mf__n mf__n--decide"><i class="ph-bold ph-receipt"></i></span>
+            </span>
+
+            <span class="mf__turn"></span>
+
+            <span class="mf__row">
+              <span class="mf__n"><i class="ph-bold ph-handshake"></i></span>
+              <span class="mf__w"><i class="mf__d" style="--d:1.6s"></i></span>
+              <span class="mf__n"><i class="ph-bold ph-chart-line-up"></i></span>
+              <span class="mf__w"><i class="mf__d" style="--d:2s"></i></span>
+              <span class="mf__n"><i class="ph-bold ph-seal-check"></i></span>
+              <span class="mf__w"><i class="mf__d" style="--d:2.4s"></i></span>
+              <span class="mf__n mf__n--won"><i class="ph-bold ph-flag-checkered"></i></span>
+            </span>
+
+            <span class="mf__caption">
+              <span>Form</span><span>Proposal</span><span>Build</span><span class="is-end">Handover</span>
+            </span>
+          </div>
+        </a>
+
       </div>
 
-      <ul class="stats" aria-label="Highlights">
-        <li class="stat reveal">
-          <i class="ph-bold ph-code stat__icon" aria-hidden="true"></i>
-          <span class="stat__num" data-count="15">15</span><span class="stat__plus">+</span>
-          <span class="stat__label">Projects built</span>
-        </li>
-        <li class="stat reveal">
-          <i class="ph-bold ph-bug-beetle stat__icon" aria-hidden="true"></i>
-          <span class="stat__num" data-count="300">300</span><span class="stat__plus">+</span>
-          <span class="stat__label">Bugs caught &amp; reported</span>
-        </li>
-        <li class="stat reveal">
-          <i class="ph-bold ph-gauge stat__icon" aria-hidden="true"></i>
-          <span class="stat__num" data-count="100">100</span><span class="stat__plus">%</span>
-          <span class="stat__label">Responsive &amp; accessible</span>
-        </li>
-      </ul>
     </section>
 
     <!-- ---------- PROJECTS ---------- -->
@@ -281,6 +414,50 @@
               <span class="pcard__title">Project TIDE-Y</span>
             </span>
           </button>
+        </div>
+
+        <!-- the row under the tiles: the quality story and the artifacts that
+             back it, which otherwise only exist inside the modals -->
+        <div class="pextra">
+          <article class="pxcard">
+            <div class="pxcard__head">
+              <span class="pxcard__icon"><i class="ph-bold ph-shield-check" aria-hidden="true"></i></span>
+              <h3 class="pxcard__title">How I know it works</h3>
+            </div>
+            <p class="pxcard__lede">I tested all three myself. After a 240-hour QA internship and the QA lead role on Gourmet Gamble, testing is not a step I add at the end &mdash; it is how I build.</p>
+            <ul class="qalist">
+              <li><i class="ph-bold ph-clipboard-text" aria-hidden="true"></i><span>Written test cases before a feature is trusted</span></li>
+              <li><i class="ph-bold ph-devices" aria-hidden="true"></i><span>Cross-browser and real-device passes</span></li>
+              <li><i class="ph-bold ph-bug-beetle" aria-hidden="true"></i><span>Bug reports with reproduction steps</span></li>
+              <li><i class="ph-bold ph-arrows-clockwise" aria-hidden="true"></i><span>Retested after every fix</span></li>
+            </ul>
+            <div class="pxcard__rail">
+              <a href="https://drive.google.com/file/d/1I1FmkaWvRnOhoqoO6nD5SPLKQfbulgZN/view?usp=sharing" target="_blank" rel="noopener noreferrer"><i class="ph-bold ph-file-pdf" aria-hidden="true"></i> Thesis paper</a>
+              <a href="https://www.youtube.com/watch?v=zUQhAGIZhkg" target="_blank" rel="noopener noreferrer"><i class="ph-bold ph-play-circle" aria-hidden="true"></i> Demo video</a>
+              <a href="https://github.com/NE0FEL1S" target="_blank" rel="noopener noreferrer"><i class="ph-bold ph-github-logo" aria-hidden="true"></i> GitHub</a>
+            </div>
+          </article>
+
+          <article class="pxcard">
+            <div class="pxcard__head">
+              <span class="pxcard__icon"><i class="ph-bold ph-lightbulb" aria-hidden="true"></i></span>
+              <h3 class="pxcard__title">What each one taught me</h3>
+            </div>
+            <ul class="learnlist">
+              <li>
+                <span class="learn__name">Sagip Pilipinas</span>
+                <span class="learn__text">Who may see what is a feature, not an afterthought. Settling the roles first saved rebuilding the dashboards around them later.</span>
+              </li>
+              <li>
+                <span class="learn__name">Gourmet Gamble</span>
+                <span class="learn__text">Leading the build taught me a bug report with clear steps moves a team faster than any conversation about it.</span>
+              </li>
+              <li>
+                <span class="learn__name">Project TIDE-Y</span>
+                <span class="learn__text">Hardware ignores your assumptions. Sand, glare and the tide broke things no bench test had touched.</span>
+              </li>
+            </ul>
+          </article>
         </div>
       </div>
     </section>
@@ -361,48 +538,57 @@
     </dialog>
 
     <!-- ---------- SERVICES ---------- -->
-    <section id="services" class="section" aria-labelledby="services-title" tabindex="-1">
+    <section id="services" class="section section--compact" aria-labelledby="services-title" tabindex="-1">
       <p class="eyebrow eyebrow--plain">Services</p>
       <h2 id="services-title" class="section__title">Websites, testing, fixes and upkeep.</h2>
       <p class="section__sub">What I build, how it works, and what you get.</p>
 
-      <!-- method panel -->
-      <div class="panel reveal">
-        <div class="panel__intro">
-          <p class="panel__eyebrow">The way I work</p>
-          <h3 class="panel__title">Build. Test. Ship.<br />Always in that order.</h3>
-          <p class="panel__text">Skip the middle step and you ship bugs. I never skip the middle step.</p>
-        </div>
+      <!-- One board: the method panel, the service cards and the booking
+           flow all sit on the same tray Projects and About use. -->
+      <div class="sboard reveal">
 
-        <ol class="steps">
-          <li class="step">
-            <div class="step__head">
-              <span class="step__icon"><i class="ph-bold ph-pen-nib" aria-hidden="true"></i></span>
-              <span class="step__num" aria-hidden="true">01</span>
-            </div>
-            <h4 class="step__title">Build.</h4>
-            <p class="step__text">Clean, semantic, responsive code written mobile-first from your content.</p>
-            <ul class="chips"><li class="chip">HTML</li><li class="chip">CSS</li><li class="chip">JS</li></ul>
-          </li>
-          <li class="step">
-            <div class="step__head">
-              <span class="step__icon"><i class="ph-bold ph-magnifying-glass" aria-hidden="true"></i></span>
-              <span class="step__num" aria-hidden="true">02</span>
-            </div>
-            <h4 class="step__title">Test.</h4>
-            <p class="step__text">Every browser, every screen size, every form. Bugs get found here, not by your customers.</p>
-            <ul class="chips"><li class="chip">Manual</li><li class="chip">Cross-browser</li><li class="chip">Reports</li></ul>
-          </li>
-          <li class="step">
-            <div class="step__head">
-              <span class="step__icon"><i class="ph-bold ph-rocket-launch" aria-hidden="true"></i></span>
-              <span class="step__num" aria-hidden="true">03</span>
-            </div>
-            <h4 class="step__title">Ship.</h4>
-            <p class="step__text">Deployed, indexed by Google, fast to load, and yours to keep.</p>
-            <ul class="chips"><li class="chip">Deploy</li><li class="chip">SEO</li><li class="chip">Handover</li></ul>
-          </li>
-        </ol>
+      <!-- everything above the fold: held to one screen so the booking
+           flow below it never peeks in -->
+      <div class="sboard__top">
+      <!-- method panel -->
+      <div class="panel">
+        <div class="panel__inner">
+          <div class="panel__intro">
+            <p class="panel__eyebrow">The way I work</p>
+            <h3 class="panel__title">Build. Test. Ship.<br /><span class="panel__title-soft">Always in that order.</span></h3>
+            <p class="panel__text">Skip the middle step and you ship bugs. I never skip the middle step.</p>
+          </div>
+
+          <ol class="steps">
+            <li class="step">
+              <div class="step__head">
+                <span class="step__icon"><i class="ph-bold ph-pen-nib" aria-hidden="true"></i></span>
+                <span class="step__num" aria-hidden="true">01</span>
+              </div>
+              <h4 class="step__title">Build.</h4>
+              <p class="step__text">Clean, semantic, responsive code, written mobile-first.</p>
+              <ul class="chips"><li class="chip">HTML</li><li class="chip">CSS</li><li class="chip">JS</li></ul>
+            </li>
+            <li class="step">
+              <div class="step__head">
+                <span class="step__icon"><i class="ph-bold ph-magnifying-glass" aria-hidden="true"></i></span>
+                <span class="step__num" aria-hidden="true">02</span>
+              </div>
+              <h4 class="step__title">Test.</h4>
+              <p class="step__text">Every browser, screen and form. Bugs get found here, not by customers.</p>
+              <ul class="chips"><li class="chip">Manual</li><li class="chip">Browsers</li><li class="chip">Reports</li></ul>
+            </li>
+            <li class="step">
+              <div class="step__head">
+                <span class="step__icon"><i class="ph-bold ph-rocket-launch" aria-hidden="true"></i></span>
+                <span class="step__num" aria-hidden="true">03</span>
+              </div>
+              <h4 class="step__title">Ship.</h4>
+              <p class="step__text">Deployed, indexed, fast to load, and yours to keep.</p>
+              <ul class="chips"><li class="chip">Deploy</li><li class="chip">SEO</li><li class="chip">Handover</li></ul>
+            </li>
+          </ol>
+        </div>
       </div>
 
       <h3 class="mid-title">What I can do for you. <span>Pick one or stack a few.</span></h3>
@@ -411,72 +597,92 @@
 
         <article class="card card--service reveal">
           <div class="card__top">
-            <div class="card__icon card__icon--sm"><i class="ph-bold ph-code-block" aria-hidden="true"></i></div>
+            <span class="card__logos" aria-hidden="true">
+              <span class="card__logo card__logo--dim"><img src="assets/logos/nextdotjs.svg" alt="" width="20" height="20" /></span>
+              <span class="card__logo"><img src="assets/logos/react.svg" alt="" width="20" height="20" /></span>
+              <span class="card__logo"><img src="assets/logos/typescript.svg" alt="" width="20" height="20" /></span>
+            </span>
             <span class="card__count">01 / 05</span>
           </div>
           <h4 class="card__title">Website Development</h4>
-          <p class="card__text">Custom sites built from scratch, not dragged from a template.</p>
-          <p class="badge">You own the code</p>
+          <p class="card__text">Custom sites built from scratch.</p>
+          <p class="badge">You own it</p>
           <ul class="checks">
-            <li><i class="ph-bold ph-check" aria-hidden="true"></i> Loads fast on every device</li>
-            <li><i class="ph-bold ph-check" aria-hidden="true"></i> Clean, readable source code</li>
+            <li><i class="ph-bold ph-check" aria-hidden="true"></i> Fast on every device</li>
+            <li><i class="ph-bold ph-check" aria-hidden="true"></i> Clean, readable code</li>
             <li><i class="ph-bold ph-check" aria-hidden="true"></i> Ready for search engines</li>
           </ul>
         </article>
 
         <article class="card card--service reveal">
           <div class="card__top">
-            <div class="card__icon card__icon--sm"><i class="ph-bold ph-bug-beetle" aria-hidden="true"></i></div>
+            <span class="card__logos" aria-hidden="true">
+              <span class="card__logo"><img src="assets/logos/selenium.svg" alt="" width="20" height="20" /></span>
+              <span class="card__logo"><img src="assets/logos/postman.svg" alt="" width="20" height="20" /></span>
+              <span class="card__logo"><img src="assets/logos/jira.svg" alt="" width="20" height="20" /></span>
+            </span>
             <span class="card__count">02 / 05</span>
           </div>
           <h4 class="card__title">QA &amp; Manual Testing</h4>
-          <p class="card__text">I break it on purpose so your customers never do.</p>
-          <p class="badge">Internship-trained</p>
+          <p class="card__text">I break it so your customers never do.</p>
+          <p class="badge">QA trained</p>
           <ul class="checks">
             <li><i class="ph-bold ph-check" aria-hidden="true"></i> Written test cases</li>
-            <li><i class="ph-bold ph-check" aria-hidden="true"></i> Clear bug reports with steps</li>
+            <li><i class="ph-bold ph-check" aria-hidden="true"></i> Bug reports with steps</li>
             <li><i class="ph-bold ph-check" aria-hidden="true"></i> Retested after every fix</li>
           </ul>
         </article>
 
         <article class="card card--service reveal">
           <div class="card__top">
-            <div class="card__icon card__icon--sm"><i class="ph-bold ph-device-mobile" aria-hidden="true"></i></div>
+            <span class="card__logos" aria-hidden="true">
+              <span class="card__logo card__logo--dim"><img src="assets/logos/css.svg" alt="" width="20" height="20" /></span>
+              <span class="card__logo"><img src="assets/logos/tailwindcss.svg" alt="" width="20" height="20" /></span>
+              <span class="card__logo"><img src="assets/logos/figma.svg" alt="" width="20" height="20" /></span>
+            </span>
             <span class="card__count">03 / 05</span>
           </div>
           <h4 class="card__title">Responsive Design</h4>
-          <p class="card__text">One site that looks right on a phone, tablet and desktop.</p>
+          <p class="card__text">Looks right on a phone, tablet and desktop.</p>
           <p class="badge">Mobile first</p>
           <ul class="checks">
-            <li><i class="ph-bold ph-check" aria-hidden="true"></i> No sideways scrolling, ever</li>
-            <li><i class="ph-bold ph-check" aria-hidden="true"></i> Tap targets people can hit</li>
+            <li><i class="ph-bold ph-check" aria-hidden="true"></i> No sideways scrolling</li>
+            <li><i class="ph-bold ph-check" aria-hidden="true"></i> Tap targets you can hit</li>
             <li><i class="ph-bold ph-check" aria-hidden="true"></i> Tested on real devices</li>
           </ul>
         </article>
 
         <article class="card card--service reveal">
           <div class="card__top">
-            <div class="card__icon card__icon--sm"><i class="ph-bold ph-eye" aria-hidden="true"></i></div>
+            <span class="card__logos" aria-hidden="true">
+              <span class="card__logo"><img src="assets/logos/html5.svg" alt="" width="20" height="20" /></span>
+              <span class="card__logo"><img src="assets/logos/chrome.svg" alt="" width="20" height="20" /></span>
+              <span class="card__logo card__logo--pale"><img src="assets/logos/javascript.svg" alt="" width="20" height="20" /></span>
+            </span>
             <span class="card__count">04 / 05</span>
           </div>
           <h4 class="card__title">Accessibility</h4>
-          <p class="card__text">Sites that older visitors and low-vision users can actually read.</p>
+          <p class="card__text">Readable for older and low-vision visitors.</p>
           <p class="badge">WCAG aware</p>
           <ul class="checks">
             <li><i class="ph-bold ph-check" aria-hidden="true"></i> Large, high-contrast type</li>
             <li><i class="ph-bold ph-check" aria-hidden="true"></i> Full keyboard navigation</li>
-            <li><i class="ph-bold ph-check" aria-hidden="true"></i> Screen-reader friendly markup</li>
+            <li><i class="ph-bold ph-check" aria-hidden="true"></i> Screen-reader friendly</li>
           </ul>
         </article>
 
         <article class="card card--service reveal">
           <div class="card__top">
-            <div class="card__icon card__icon--sm"><i class="ph-bold ph-wrench" aria-hidden="true"></i></div>
+            <span class="card__logos" aria-hidden="true">
+              <span class="card__logo"><img src="assets/logos/git.svg" alt="" width="20" height="20" /></span>
+              <span class="card__logo card__logo--dim"><img src="assets/logos/github.svg" alt="" width="20" height="20" /></span>
+              <span class="card__logo"><img src="assets/logos/vscode.webp" alt="" width="20" height="20" /></span>
+            </span>
             <span class="card__count">05 / 05</span>
           </div>
           <h4 class="card__title">Fixes &amp; Maintenance</h4>
-          <p class="card__text">Something broken or slow? I diagnose it and repair it.</p>
-          <p class="badge">Quick turnaround</p>
+          <p class="card__text">Something broken? I diagnose and fix it.</p>
+          <p class="badge">Quick fixes</p>
           <ul class="checks">
             <li><i class="ph-bold ph-check" aria-hidden="true"></i> Bug hunting and repair</li>
             <li><i class="ph-bold ph-check" aria-hidden="true"></i> Speed and SEO clean-up</li>
@@ -485,6 +691,118 @@
         </article>
 
       </div>
+
+      </div>
+
+      <!-- ---------- BOOKING FLOW ---------- -->
+      <div class="flowwrap">
+        <p class="eyebrow eyebrow--plain flowwrap__eyebrow">Booking process</p>
+        <h3 class="flowwrap__title">One form. I take it from there.</h3>
+        <p class="flowwrap__sub">
+          You send one message. Here is every step between that and a finished project,
+          including what happens when a call is missed or a proposal needs another pass.
+        </p>
+        <ul class="flowwrap__chips">
+          <li class="chip"><i class="ph-bold ph-envelope-simple" aria-hidden="true"></i> Email</li>
+          <li class="chip"><i class="ph-bold ph-video-camera" aria-hidden="true"></i> Video call</li>
+          <li class="chip"><i class="ph-bold ph-bell-ringing" aria-hidden="true"></i> Written updates</li>
+        </ul>
+
+        <div class="flow">
+          <div class="flow__bar" aria-hidden="true">
+            <span class="flow__lights"><i></i><i></i><i></i></span>
+            <span class="flow__barname">Booking workflow</span>
+          </div>
+          <div class="flow__canvas">
+            <span class="flow__wires" aria-hidden="true">
+              <span class="fline fline--right" style="--x:8%; --span:16%; --y:6%; --d:0.00s"><i class="fdot"></i></span>
+              <span class="fline fline--right" style="--x:24%; --span:16%; --y:6%; --d:0.34s"><i class="fdot"></i></span>
+              <span class="fline fline--right" style="--x:40%; --span:16%; --y:6%; --d:0.68s"><i class="fdot"></i></span>
+              <span class="fline fline--right" style="--x:56%; --span:16%; --y:6%; --d:1.02s"><i class="fdot"></i></span>
+              <span class="fline fline--right" style="--x:72%; --span:16%; --y:6%; --d:1.36s"><i class="fdot"></i></span>
+              <span class="fline fline--right" style="--x:8%; --span:16%; --y:60%; --d:2.72s"><i class="fdot"></i></span>
+              <span class="fline fline--right" style="--x:24%; --span:16%; --y:60%; --d:3.06s"><i class="fdot"></i></span>
+              <span class="fline fline--right" style="--x:40%; --span:16%; --y:60%; --d:3.40s"><i class="fdot"></i></span>
+
+              <!-- the outcome routes leaving the proposal: one drop to a shared
+                   junction at 44%, then the main path runs solid back to row two
+                   while the redirection carries on down, dashed. -->
+              <span class="fline fline--drop" style="--x:88%; --y:calc(6% + 6.1rem); --h:calc(38% - 6.1rem); --d:1.70s"><i class="fdot fdot--down"></i></span>
+              <span class="fline fline--rail" style="--x:8%; --span:80%; --y:44%; --d:2.04s"><i class="fdot fdot--left"></i></span>
+              <span class="fline fline--drop" style="--x:8%; --y:44%; --h:16%; --d:2.38s"><i class="fdot fdot--down"></i></span>
+
+              <span class="fbranch" style="--from:40%; --to:72%; --y:6%">
+                <span class="fbranch__label">Meeting rescheduled</span>
+              </span>
+              <span class="fline fline--drop fline--dashed" style="--x:88%; --y:44%; --h:16%; --d:2.55s">
+                <i class="fdot fdot--down"></i>
+                <span class="fbranch__label fbranch__label--drop">Proposal not accepted</span>
+              </span>
+            </span>
+
+            <ol class="flow__nodes">
+              <li class="fnode fnode--start" style="--x:8%; --y:6%">
+                <span class="fnode__icon"><i class="ph-bold ph-note-pencil" aria-hidden="true"></i></span>
+                <span class="fnode__name">Submit form</span>
+                <span class="fnode__sub">You send the brief</span>
+              </li>
+              <li class="fnode" style="--x:24%; --y:6%">
+                <span class="fnode__icon"><i class="ph-bold ph-envelope-open" aria-hidden="true"></i></span>
+                <span class="fnode__name">View message</span>
+                <span class="fnode__sub">Read within a day</span>
+              </li>
+              <li class="fnode" style="--x:40%; --y:6%">
+                <span class="fnode__icon"><i class="ph-bold ph-paper-plane-tilt" aria-hidden="true"></i></span>
+                <span class="fnode__name">Reply to email</span>
+                <span class="fnode__sub">Questions and scope</span>
+              </li>
+              <li class="fnode" style="--x:56%; --y:6%">
+                <span class="fnode__icon"><i class="ph-bold ph-calendar-check" aria-hidden="true"></i></span>
+                <span class="fnode__name">Set meeting</span>
+                <span class="fnode__sub">A call that suits you</span>
+              </li>
+              <li class="fnode" style="--x:72%; --y:6%">
+                <span class="fnode__icon"><i class="ph-bold ph-clipboard-text" aria-hidden="true"></i></span>
+                <span class="fnode__name">Details confirmed</span>
+                <span class="fnode__sub">Scope and timeline</span>
+              </li>
+              <li class="fnode fnode--decide" style="--x:88%; --y:6%">
+                <span class="fnode__icon"><i class="ph-bold ph-receipt" aria-hidden="true"></i></span>
+                <span class="fnode__name">Proposal sent</span>
+                <span class="fnode__sub">Fixed price, in writing</span>
+              </li>
+              <li class="fnode" style="--x:8%; --y:60%">
+                <span class="fnode__icon"><i class="ph-bold ph-handshake" aria-hidden="true"></i></span>
+                <span class="fnode__name">Project accepted</span>
+                <span class="fnode__sub">Work begins</span>
+              </li>
+              <li class="fnode" style="--x:24%; --y:60%">
+                <span class="fnode__icon"><i class="ph-bold ph-chart-line-up" aria-hidden="true"></i></span>
+                <span class="fnode__name">Project updates</span>
+                <span class="fnode__sub">Progress you can see</span>
+              </li>
+              <li class="fnode" style="--x:40%; --y:60%">
+                <span class="fnode__icon"><i class="ph-bold ph-seal-check" aria-hidden="true"></i></span>
+                <span class="fnode__name">Tested and checked</span>
+                <span class="fnode__sub">Before it reaches you</span>
+              </li>
+              <li class="fnode fnode--won" style="--x:56%; --y:60%">
+                <span class="fnode__icon"><i class="ph-bold ph-flag-checkered" aria-hidden="true"></i></span>
+                <span class="fnode__name">Finish project</span>
+                <span class="fnode__sub">Handed over, yours</span>
+              </li>
+              <li class="fnode fnode--alt" style="--x:88%; --y:60%">
+                <span class="fnode__icon"><i class="ph-bold ph-arrow-u-up-left" aria-hidden="true"></i></span>
+                <span class="fnode__name">Proposal revised</span>
+                <span class="fnode__sub">Another pass, resent</span>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      </div><!-- /.sboard -->
+
     </section>
 
     <!-- ---------- ABOUT ---------- -->
@@ -730,13 +1048,6 @@
         </form>
       </div>
     </section>
-
-    <footer class="footer">
-      <p>&copy; <span class="year">2026</span> Arbien M. Armenion. Built by hand with HTML, CSS and JavaScript.</p>
-      <button type="button" class="to-top" id="toTop">
-        <i class="ph-bold ph-arrow-up" aria-hidden="true"></i> Back to top
-      </button>
-    </footer>
   </main>
 
   <!-- ================= ACCESSIBILITY WIDGET ================= -->
@@ -794,6 +1105,6 @@
     </button>
   </div>
 
-  <script src="js/script.js?v=20260909154523"></script>
+  <script src="js/script.js?v=1789044104"></script>
 </body>
 </html>
