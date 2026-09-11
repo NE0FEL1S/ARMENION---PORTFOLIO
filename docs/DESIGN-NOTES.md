@@ -577,10 +577,12 @@ here so a later change does not undo them by accident.
 1. **The "View resume" button** points at a Google Drive file, and anyone with
    the link can open it. Check the sharing setting is what you intend, and
    update the URL in `index.html` when you revise the document.
-2. **The AI proficiency levels** on the home board — Daily / Often / Trying and
-   the dot meters — are a first guess, not something that was specified. Adjust
-   them to what is actually true. Grok is drawn as a glyph rather than a logo,
-   because xAI publishes no openly licensed mark.
+2. **The AI proficiency levels** on the home board started as a first guess and
+   have since been set deliberately: Claude and ChatGPT at Daily, Gemini,
+   DeepSeek and Grok at Often. The label and the dot meter have to move together
+   — three dots for Daily, two for Often — or a row says one thing and shows
+   another. Grok is drawn as a glyph rather than a logo, because xAI publishes
+   no openly licensed mark.
 3. **The three "what each project taught me" lines** are drafted, not dictated.
    They read as the author's own words and should be checked against what he
    would actually say.
@@ -694,13 +696,15 @@ second to catch up. An earlier version paired it with a small dot pinned to the
 pointer; the dot was doing the arrow's job twice over, and filled the middle of
 the ring whenever the pointer came to rest.
 
-- The ring closes `0.055` of the remaining distance each frame on a `rAF`
-  loop. Because the step is a fraction of what is left, it starts fast
-  and settles slowly, which is what makes it read as something running after the
-  pointer rather than pinned to it. It closes 95% of a long flick in about 53
-  frames, a little under a second. The value has come down twice: `0.18` tracked
-  so closely it was not noticeable, `0.08` still read as attached. Much below
-  `0.055` and it stops feeling connected to the pointer at all.
+- The ring closes `0.04` of the remaining distance each frame on a `rAF` loop.
+  Because the step is a fraction of what is left, it starts fast and settles
+  slowly, which is what makes it read as something running after the pointer
+  rather than pinned to it. It closes 95% of a long flick in about 73 frames,
+  a little over a second — a long trail by the standards of the effect, and
+  deliberately so. The value has come down three times: `0.18` tracked so
+  closely it was not noticeable, then `0.08`, then `0.055`, each still reading
+  as attached to the pointer. Only the visible arrow makes this affordable; the
+  ring carries no positional duty, so it can take as long as it likes.
 - Both are moved by a `transform` reading two custom properties, so the work
   stays on the compositor and never touches layout. The element is
   `position: fixed` with `pointer-events: none`, so it adds no scrollable area

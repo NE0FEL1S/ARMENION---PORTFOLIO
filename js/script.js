@@ -592,10 +592,10 @@
     /* The trail. The ring closes this fraction of the remaining distance each
        frame, so it starts fast and settles slowly - which is what makes it
        read as something running after the pointer rather than pinned to it.
-       At 0.055 it takes a little under a second to settle after a long flick.
-       Anything above ~0.1 tracks too closely to notice; much below this and
-       the ring stops feeling connected to the pointer at all. */
-    const EASE = 0.055;
+       At 0.04 it takes a little over a second to settle after a long flick,
+       which is a long trail by the standards of the effect - deliberately so.
+       Anything above ~0.1 tracks too closely to notice. */
+    const EASE = 0.04;
 
     function follow() {
       ringX += (targetX - ringX) * EASE;
