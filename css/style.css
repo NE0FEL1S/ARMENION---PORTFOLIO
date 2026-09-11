@@ -31,6 +31,10 @@
   --tray-edge:    rgba(120, 145, 205, .42);  /* so a board reads as a card */
   --accent-soft:  #FCE5D8;
   --accent-ring:  rgba(233, 98, 43, 0.28);
+  /* The cursor ring reads as a pointer, not as brand: black on a light page
+     keeps it legible over every surface the page has, including the orange
+     accents it would otherwise disappear into. */
+  --cursor-ink:   #000000;
   --blue-soft:    #DCE4F7;
   --blue-soft-2:  #C9D6F5;
   --border:       #E4E7EC;
@@ -89,6 +93,7 @@
   --tray-edge:    rgba(130, 150, 205, .30);
   --accent-soft:  #3A2418;
   --accent-ring:  rgba(255, 133, 81, .35);
+  --cursor-ink:   var(--accent);   /* black would vanish here */
   --blue-soft:    #212840;
   --blue-soft-2:  #2A3352;
   --border:       #2C3145;
@@ -117,6 +122,7 @@
   --accent-line: #8F3410;
   --tray-edge: #000000;
   --accent-soft: #FFE7DA;
+  --cursor-ink: #000000;
   --border: #000000;
   --border-strong: #000000;
   --line-strong: #000000;
@@ -171,12 +177,31 @@ html {
   background: var(--cream);
   transition: background var(--speed) ease;
   overflow-x: clip;
+  /* Reserve the scrollbar's width whether or not one is showing. Without this
+     the layout width changes the moment a view overflows, which narrows the
+     cards, which wraps the copy to another line, which makes the view taller
+     still: a view that was one pixel too tall becomes twenty. Holding the
+     gutter open costs ~15px once and keeps every measurement honest. */
+  scrollbar-gutter: stable;
   font-size: calc(17px * var(--fs-scale));
   scroll-behavior: smooth;
   /* Anchor landing offset is handled by .section's scroll-margin-top so there is
      a single source of truth. On mobile this gains the sticky top bar's height. */
   scroll-padding-top: 0;
   -webkit-text-size-adjust: 100%;
+}
+
+/* The one-screen views are sized in rem, so the root size is the single dial
+   that decides whether they fit. A browser viewport is a good deal shorter
+   than the screen it sits on - tab strip, address bar and taskbar take
+   90-140px between them - so pinning the root to one size only ever fits one
+   machine. Tying it to the viewport's own height instead keeps the same
+   proportions on a short window as on a tall one: roughly 1px of root per 48px
+   of height, held between 13px and the 17px the design was drawn at.
+   Desktop only. Below 901px the views are allowed to scroll, so there is
+   nothing to fit and nothing to shrink for. */
+@media (min-width: 901px) {
+  html { font-size: calc(clamp(13px, 2.0833vh - 2px, 17px) * var(--fs-scale)); }
 }
 
 body {
@@ -465,6 +490,72 @@ em { font-style: italic; }
 [data-motion="reduced"] .bgfield { display: none; }
 @media print { .bgfield { display: none; } }
 
+
+/* ---------------------------------------------------------------
+   CURSOR RING
+   An open ring that runs after the pointer. Hollow in every state:
+   nothing is ever painted inside it, so whatever it passes over stays
+   readable through the middle.
+
+   The system cursor is left alone - this sits on top of it rather than
+   replacing it - so the arrow still marks the exact point, the ring is
+   free to lag behind it, and nothing is lost if the effect is switched
+   off.
+
+   It is driven by a translate that JavaScript writes to two custom
+   properties, which keeps the animation on the compositor and off the
+   layout. The element starts hidden and the script only reveals it
+   once a real pointer has actually moved.
+   --------------------------------------------------------------- */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+.cursor.is-awake { opacity: 1; }
+
+.cursor__ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  /* -50% recentres the shape on the point rather than its top-left corner */
+  transform: translate(calc(var(--x, 0px) - 50%), calc(var(--y, 0px) - 50%));
+  will-change: transform;
+  border: 1.5px solid var(--cursor-ink);
+  /* no background in any state: the ring reads as an outline, and text it
+     passes over is never washed out by a fill */
+  background: none;
+  opacity: .5;
+  transition: width .22s ease, height .22s ease, opacity .22s ease,
+              border-color .22s ease;
+}
+
+/* over something clickable the ring opens up, which is the whole point of the
+   thing: it reports what is interactive before the click */
+.cursor.is-over-link .cursor__ring {
+  width: 52px;
+  height: 52px;
+  opacity: .85;
+}
+
+/* and it presses in on mousedown, so a click has a visible answer */
+.cursor.is-down .cursor__ring { width: 26px; height: 26px; opacity: 1; }
+
+/* Nothing to follow without a pointer, and nothing to animate when motion is
+   reduced. The script refuses to start in both cases; these are the belt to
+   its braces and also catch the reading options being changed mid-session. */
+@media (hover: none), (pointer: coarse) { .cursor { display: none; } }
+@media (prefers-reduced-motion: reduce) { .cursor { display: none; } }
+[data-motion="reduced"] .cursor { display: none; }
+@media print { .cursor { display: none; } }
+
 /* ---------------------------------------------------------------
    4. MAIN LAYOUT
    --------------------------------------------------------------- */
@@ -710,10 +801,15 @@ em { font-style: italic; }
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-auto-rows: minmax(0, 1fr);
-  gap: clamp(.5rem, .7vw, .75rem);
+  /* The tray's own gap, margin and padding are the board's last reserve. They
+     were sized against the width alone, which is fine on a tall screen and
+     costs ~35px on a short one - and the board cannot shrink to pay for it,
+     because the cards clip. Capping each against the height as well hands
+     those pixels back exactly when the fold needs them. */
+  gap: clamp(.4rem, min(.7vw, .85vh), .75rem);
   /* the board needs to read as its own block, not as part of the marquee */
-  margin-top: clamp(.7rem, 1vw, 1rem);
-  padding: clamp(.45rem, .6vw, .7rem);
+  margin-top: clamp(.4rem, min(1vw, 1.05vh), 1rem);
+  padding: clamp(.3rem, min(.6vw, .7vh), .7rem);
   border: 1px solid var(--tray-edge);
   border-radius: var(--radius-lg);
   background: linear-gradient(115deg, var(--card) 0%, var(--card) 38%, var(--blue-soft) 78%, var(--blue-soft-2) 100%);
@@ -729,7 +825,7 @@ em { font-style: italic; }
   min-height: 0;
   min-width: 0;
   overflow: hidden;
-  padding: clamp(7px, .8vh, 10px) clamp(10px, .95vw, 14px);
+  padding: clamp(5px, .8vh, 10px) clamp(10px, .95vw, 14px);
   border-radius: 24px;
   background: var(--card);
   color: inherit;
@@ -1815,21 +1911,17 @@ em { font-style: italic; }
    of view.
    Every pixel added above the cards is a pixel of headroom they lose at the
    bottom of the screen, so the gap only opens where there is room for it. */
+/* Three auto margins, so whatever headroom the screen leaves is split three
+   ways - above the panel, between the panel and the mid-title, and under the
+   cards - instead of collecting as one dead band below the grid.
+   This replaces a pair of hand-fitted formulas that only ran above 840px tall
+   and left the slack undistributed on exactly the shorter screens that needed
+   it most. The browser already knows how much room is spare; asking it beats
+   predicting it. The mid-title keeps no gap under it: it labels the grid and
+   has to stay attached to it. */
+.js .sboard__top .panel          { margin-top: auto; }
+.js .sboard__top .mid-title      { margin-top: auto; }
 .js .sboard__top .grid--services { margin-bottom: auto; }
-@media (min-height: 840px) {
-  /* the gap grows with the width, because that is what decides how tall the
-     cards wrap to and therefore how much headroom is left under them: nothing
-     below 1400px, a third of every pixel above it, capped by the screen's own
-     height and by 4.5rem */
-  .js .sboard__top .mid-title {
-    margin-top: clamp(0px, min(calc((100vh - 820px) / 3), calc((100vw - 1400px) / 10)), 6rem);
-  }
-  /* and the whole block starts a little lower, which turns headroom the cards
-     were not using into space above the panel rather than below them */
-  .js .sboard__top .panel {
-    margin-top: clamp(0px, min(calc((100vh - 820px) / 3), calc((100vw - 1520px) / 4)), 6rem);
-  }
-}
 
 .sboard .panel    { margin-bottom: clamp(.5rem, .8vw, .8rem); }
 .sboard .mid-title { margin-bottom: clamp(.4rem, .6vw, .6rem); }
@@ -2649,13 +2741,6 @@ em { font-style: italic; }
    regardless. Letting the two gaps open further here is what keeps the spare
    height inside the layout instead of collecting as a dead band under the
    cards. */
-@media (min-width: 901px) and (min-height: 920px) {
-  .js .sboard__top .mid-title,
-  .js .sboard__top .panel {
-    margin-top: clamp(0px, calc((100vh - 830px) / 2.2), 8rem);
-  }
-}
-
 @media (min-width: 1520px) {
   .card--service .card__title { font-size: var(--fs-base); }
   .card--service .card__text  { font-size: var(--fs-xs); line-height: 1.45; min-height: 2.9em; }

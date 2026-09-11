@@ -559,7 +559,117 @@
   }
 
   /* -----------------------------------------------------------------
-     10. CONTACT FORM
+     10. CURSOR RING
+     An open ring that runs after the pointer on a rAF loop. The system
+     cursor is left visible and marks the exact point, which is what
+     frees this one to lag: it is decoration and a hover cue, not a
+     position indicator, so it never has to keep up.
+
+     It runs only where there is a real pointer to follow and only
+     while motion is allowed, and it parks itself the moment the tab is
+     hidden or the pointer leaves the window.
+     ----------------------------------------------------------------- */
+  const cursor = $("#cursorRing");
+
+  if (cursor) {
+    const ring = $(".cursor__ring", cursor);
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+
+    /* what should make the ring open up: anything a visitor can act on */
+    const INTERACTIVE = "a, button, input, textarea, select, summary, " +
+                        "[role='button'], [tabindex]:not([tabindex='-1'])";
+
+    let targetX = 0, targetY = 0;   /* where the pointer is */
+    let ringX   = 0, ringY   = 0;   /* where the ring has caught up to */
+    let frame = 0, running = false, seen = false;
+
+    function cursorOff() {
+      return !finePointer.matches ||
+             reducedMotionQuery.matches ||
+             root.getAttribute("data-motion") === "reduced";
+    }
+
+    /* The trail. The ring closes this fraction of the remaining distance each
+       frame, so it starts fast and settles slowly - which is what makes it
+       read as something running after the pointer rather than pinned to it.
+       At 0.055 it takes a little under a second to settle after a long flick.
+       Anything above ~0.1 tracks too closely to notice; much below this and
+       the ring stops feeling connected to the pointer at all. */
+    const EASE = 0.055;
+
+    function follow() {
+      ringX += (targetX - ringX) * EASE;
+      ringY += (targetY - ringY) * EASE;
+      ring.style.setProperty("--x", ringX + "px");
+      ring.style.setProperty("--y", ringY + "px");
+      frame = requestAnimationFrame(follow);
+    }
+
+    function startCursor() {
+      if (running || cursorOff()) return;
+      running = true;
+      frame = requestAnimationFrame(follow);
+    }
+
+    function stopCursor() {
+      if (!running) return;
+      running = false;
+      cancelAnimationFrame(frame);
+      cursor.classList.remove("is-awake", "is-over-link", "is-down");
+      seen = false;
+    }
+
+    document.addEventListener("pointermove", (e) => {
+      if (e.pointerType !== "mouse" || cursorOff()) return;
+
+      targetX = e.clientX;
+      targetY = e.clientY;
+
+      /* First move: drop the ring straight onto the pointer rather than
+         letting it fly in from the corner, then fade the whole thing up.
+         The position has to be written here and not left to the loop: until
+         the first frame runs the ring has no coordinates at all, and would
+         paint once at the top-left corner. */
+      if (!seen) {
+        seen = true;
+        ringX = targetX;
+        ringY = targetY;
+        ring.style.setProperty("--x", ringX + "px");
+        ring.style.setProperty("--y", ringY + "px");
+        cursor.classList.add("is-awake");
+        startCursor();
+      }
+
+      cursor.classList.toggle("is-over-link", !!e.target.closest(INTERACTIVE));
+    }, { passive: true });
+
+    document.addEventListener("pointerdown", (e) => {
+      if (e.pointerType === "mouse") cursor.classList.add("is-down");
+    }, { passive: true });
+    document.addEventListener("pointerup", () => {
+      cursor.classList.remove("is-down");
+    }, { passive: true });
+
+    /* off the edge of the window there is no pointer to follow */
+    document.addEventListener("mouseleave", () => cursor.classList.remove("is-awake"));
+    document.addEventListener("mouseenter", () => {
+      if (seen && !cursorOff()) cursor.classList.add("is-awake");
+    });
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) stopCursor();
+    });
+
+    /* the reading options can turn motion off after the loop has started */
+    new MutationObserver(() => { if (cursorOff()) stopCursor(); })
+      .observe(root, { attributes: true, attributeFilter: ["data-motion"] });
+    reducedMotionQuery.addEventListener("change", () => {
+      if (cursorOff()) stopCursor();
+    });
+  }
+
+  /* -----------------------------------------------------------------
+     11. CONTACT FORM
      Client-side only: validates, then hands the message to the
      visitor's own email app. No third-party form service involved.
      ----------------------------------------------------------------- */

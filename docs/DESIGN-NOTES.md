@@ -566,3 +566,154 @@ Built for visitors who are older or have low vision.
   interactive targets of at least 44px.
 - `prefers-reduced-motion` and `prefers-color-scheme` are both respected.
 
+
+---
+
+## Maintenance notes
+
+Things that are a deliberate choice or an open question rather than a bug, kept
+here so a later change does not undo them by accident.
+
+1. **The "View resume" button** points at a Google Drive file, and anyone with
+   the link can open it. Check the sharing setting is what you intend, and
+   update the URL in `index.html` when you revise the document.
+2. **The AI proficiency levels** on the home board — Daily / Often / Trying and
+   the dot meters — are a first guess, not something that was specified. Adjust
+   them to what is actually true. Grok is drawn as a glyph rather than a logo,
+   because xAI publishes no openly licensed mark.
+3. **The three "what each project taught me" lines** are drafted, not dictated.
+   They read as the author's own words and should be checked against what he
+   would actually say.
+4. **Link previews reuse the profile photo.** For a richer card, add a 1200x630
+   image and point `og:image` and `twitter:image` at it.
+5. **The profile photo** is `assets/profile.jpg`, a 400x400 square crop (19 KB)
+   generated from `public/images/profile avatar.jpg` (3 MB, kept as the
+   original). Regenerate the crop if the source changes, and never link the
+   3 MB original from the page.
+6. **Social profiles** are listed in three places — the sidebar, the contact
+   section and the JSON-LD `sameAs` array. Add any new one to all three.
+7. **The `?v=` stamps** on the stylesheet and script links in `index.html` are
+   the cache-buster. Bump them whenever `css/style.css` or `js/script.js`
+   changes, or a returning visitor keeps the old file.
+
+## Fitting the one-screen views
+
+The three one-screen views used to be held to the fold by hand-fitted constants:
+`min-height: calc(100vh - 8.35rem)` on the Services board, a `min-height: 100vh`
+main column, and spacing ladders gated at `min-height: 840px` and `920px`. Each
+of those numbers was measured against a single viewport, roughly 1600x900.
+
+That is only ever correct on one machine. A browser viewport is a good deal
+shorter than the screen it sits on — the tab strip, address bar and taskbar take
+90-140px between them — so a 1920x1080 display at 125% scaling gives about
+1520x760 to work with. At that size every ladder landed in a different branch
+than the one it was tuned for, and all three views overflowed: home by 93px,
+Services by 82px, About by 159px. The accessibility button overlapped the last
+nav link on anything shorter than ~700px.
+
+Two things were making it worse than it looked:
+
+- **The scrollbar fed back into the layout.** Every headless measurement ran
+  with `--hide-scrollbars`. In a real browser the scrollbar takes ~15px of
+  width, which narrows the cards, which wraps the copy to another line, which
+  makes the view taller, which keeps the scrollbar. `scrollbar-gutter: stable`
+  on `html` holds the gutter open whether or not one is showing, so the layout
+  width stops depending on the content height.
+- **The measurement harness was lying.** `.js .reveal` parks every revealed
+  block at `translateY(22px)` until its IntersectionObserver fires, and an
+  off-screen iframe never intersects anything. `getBoundingClientRect` includes
+  transforms, so every reading was inflated by 22px of overflow that did not
+  exist. Any harness that measures this page must settle the reveals first —
+  `data-motion="reduced"` on the root is the cheapest way.
+
+The fix replaces prediction with derivation:
+
+- Root type scales with the viewport's own height on desktop,
+  `clamp(13px, 2.0833vh - 2px, 17px)` — about 1px of root per 48px of height,
+  held between 13px and the 17px the design was drawn at. Because the views are
+  sized in rem, one dial moves all of them together and the proportions hold on
+  a short window. Gated to `min-width: 901px`; below that the views scroll and
+  there is nothing to fit.
+- The bento tray's gap, margin and padding are capped against the height as well
+  as the width. They are the board's only reserve, because the board itself
+  cannot shrink — the cards are `overflow: hidden` and would clip.
+- The Services slack is distributed by three `auto` margins instead of two
+  hand-fitted formulas, so whatever headroom the screen leaves is split between
+  the space above the panel, the gap under it, and the room beneath the cards,
+  rather than collecting as one dead band below the grid. The mid-title keeps no
+  gap under it; it labels the grid and has to stay attached to it.
+
+Measured after the change, with scrollbars showing and reveals settled, all
+three views fit from 1600x900 down to 1280x720, and the Services board clears
+the fold by the 8-10px that keeps the booking flow out of sight.
+
+## Cursor ring
+
+An open ring that runs after the pointer, opening wider over anything a visitor
+can act on. It is hollow in every state — nothing is ever painted inside it, so
+text and images it passes over stay readable through the middle.
+
+It sits **on top of** the system cursor rather than replacing it. Hiding the
+real arrow is the usual way to build this, and it is the wrong trade: the arrow
+is what tells a visitor whether they are over text, a link or a resize edge, and
+a custom cursor that lags — or fails to load — leaves them with nothing.
+
+Leaving the arrow visible is also what frees the ring to lag as far behind as it
+does. The arrow already marks the exact point, so the ring carries no positional
+duty at all: it is decoration and a hover cue, and is allowed to take most of a
+second to catch up. An earlier version paired it with a small dot pinned to the
+pointer; the dot was doing the arrow's job twice over, and filled the middle of
+the ring whenever the pointer came to rest.
+
+- The ring closes `0.055` of the remaining distance each frame on a `rAF`
+  loop. Because the step is a fraction of what is left, it starts fast
+  and settles slowly, which is what makes it read as something running after the
+  pointer rather than pinned to it. It closes 95% of a long flick in about 53
+  frames, a little under a second. The value has come down twice: `0.18` tracked
+  so closely it was not noticeable, `0.08` still read as attached. Much below
+  `0.055` and it stops feeling connected to the pointer at all.
+- Both are moved by a `transform` reading two custom properties, so the work
+  stays on the compositor and never touches layout. The element is
+  `position: fixed` with `pointer-events: none`, so it adds no scrollable area
+  and cannot intercept a click.
+- `background: none` in every state, including hover. An earlier version washed
+  the middle with 12% of the ink over links, which is exactly the thing that
+  stops a ring reading as an outline.
+- Colour comes from a `--cursor-ink` token rather than the brand accent:
+  **black on a light page**, where orange-on-orange would disappear over the
+  hero copy and the accent chips, and the accent in dark mode, where black
+  would vanish instead. High contrast takes black as well.
+- `aria-hidden` — it is decoration, and assistive technology should never
+  announce it.
+- It refuses to start without a fine pointer (`hover: hover and pointer: fine`),
+  ignores any event whose `pointerType` is not `mouse`, and stops when the tab
+  is hidden or motion is reduced. CSS repeats each of those guards, so the
+  reading options can switch it off mid-session.
+- The ring's position is written once directly on the first pointer move rather
+  than left to the loop. Until the first frame runs it has no coordinates at
+  all, and would paint once in the top-left corner before snapping into place.
+
+### Testing it headlessly
+
+`requestAnimationFrame` runs at **1 fps** under headless Edge, against 60 in a
+real browser. Anything driven by a rAF loop or a CSS transition therefore looks
+stalled: a `.22s` transition never finishes, and an eased value advances by a
+single step. Two things make the behaviour testable anyway — assert on one
+easing step rather than on convergence (`80 + 0.18 * 350 = 143` exactly), and
+inject `transition: none !important` so each state can be measured at its end
+value instead of mid-ease.
+
+Worse, the rAF loop is not merely slow but **unreliable**: in an iframe parked
+off-screen it is suspended outright, and even on-screen it can decline to run
+for many seconds together. A single timed sample is a coin flip. Where the
+runtime value matters, drive the assertion off one observed step rather than off
+convergence, and be ready to fall back to checking the constant in the file the
+browser is actually served.
+
+The transition trap is worth spelling out, because it reads exactly like a
+broken stylesheet: `--cursor-ink` resolved correctly to `#000000` under
+`data-theme="light"` while the ring's *computed* `border-color` stayed on the
+previous theme's orange. Nothing was wrong — `border-color` is transitioned over
+`.22s`, and at 1fps that transition had not advanced a single step. Always probe
+the custom property and the computed value together; when they disagree, suspect
+the transition before the cascade.

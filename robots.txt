@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Update the domain below once the site is deployed
-Sitemap: https://arbienarmenion.com/sitemap.xml
+Sitemap: https://armenion-portfolio.vercel.app/sitemap.xml

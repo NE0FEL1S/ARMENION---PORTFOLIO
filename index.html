@@ -14,15 +14,15 @@
   <meta name="theme-color" content="#12141C" media="(prefers-color-scheme: dark)" />
 
   <!-- Update this to your live domain once deployed -->
-  <link rel="canonical" href="https://arbienarmenion.com/" />
+  <link rel="canonical" href="https://armenion-portfolio.vercel.app/" />
 
   <!-- ============ OPEN GRAPH ============ -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Arbien M. Armenion — Portfolio" />
   <meta property="og:title" content="Arbien M. Armenion | Web Developer &amp; QA-Minded Front-End Engineer" />
   <meta property="og:description" content="I build fast, accessible websites and test them like a QA engineer. See my projects, services, and how we can work together." />
-  <meta property="og:url" content="https://arbienarmenion.com/" />
-  <meta property="og:image" content="https://arbienarmenion.com/assets/profile.jpg" />
+  <meta property="og:url" content="https://armenion-portfolio.vercel.app/" />
+  <meta property="og:image" content="https://armenion-portfolio.vercel.app/assets/profile.jpg" />
   <meta property="og:image:alt" content="Arbien M. Armenion, Web Developer" />
   <meta property="og:locale" content="en_US" />
 
@@ -30,7 +30,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Arbien M. Armenion | Web Developer &amp; QA-Minded Front-End Engineer" />
   <meta name="twitter:description" content="I build fast, accessible websites and test them like a QA engineer." />
-  <meta name="twitter:image" content="https://arbienarmenion.com/assets/profile.jpg" />
+  <meta name="twitter:image" content="https://armenion-portfolio.vercel.app/assets/profile.jpg" />
 
   <!-- ============ ICONS ============ -->
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
@@ -46,7 +46,7 @@
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css" />
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
 
-  <link rel="stylesheet" href="css/style.css?v=1789105260" />
+  <link rel="stylesheet" href="css/style.css?v=1789126748" />
 
   <!-- Marks that JS is running, so scroll-reveal only hides content it can bring back -->
   <script>document.documentElement.className += " js";</script>
@@ -60,10 +60,10 @@
     "givenName": "Arbien",
     "familyName": "Armenion",
     "jobTitle": "Web Developer",
-    "image": "https://arbienarmenion.com/assets/profile.jpg",
+    "image": "https://armenion-portfolio.vercel.app/assets/profile.jpg",
     "description": "Web developer with quality assurance experience, building fast, accessible and responsive websites.",
     "email": "mailto:armenionarbien53@gmail.com",
-    "url": "https://arbienarmenion.com/",
+    "url": "https://armenion-portfolio.vercel.app/",
     "knowsAbout": [
       "Web Development",
       "Front-End Development",
@@ -85,7 +85,7 @@
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Arbien M. Armenion — Portfolio",
-    "url": "https://arbienarmenion.com/",
+    "url": "https://armenion-portfolio.vercel.app/",
     "inLanguage": "en",
     "author": { "@type": "Person", "name": "Arbien M. Armenion" }
   }
@@ -96,6 +96,13 @@
   <!-- the contour field behind the page; script.js leaves it blank when the
        visitor has asked for reduced motion -->
   <canvas class="bgfield" id="bgField" aria-hidden="true"></canvas>
+
+  <!-- Cursor ring. Decorative and inert: aria-hidden so assistive tech never
+       announces it, pointer-events:none so it cannot intercept a click.
+       Script only shows it on a device with a real pointer. -->
+  <div class="cursor" id="cursorRing" aria-hidden="true">
+    <span class="cursor__ring"></span>
+  </div>
   <a class="skip-link" href="#main">Skip to main content</a>
 
   <!-- ================= MOBILE TOP BAR ================= -->
@@ -1116,6 +1123,6 @@
     </button>
   </div>
 
-  <script src="js/script.js?v=1789105260"></script>
+  <script src="js/script.js?v=1789126748"></script>
 </body>
 </html>
