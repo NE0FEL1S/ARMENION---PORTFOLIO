@@ -647,6 +647,35 @@ Measured after the change, with scrollbars showing and reveals settled, all
 three views fit from 1600x900 down to 1280x720, and the Services board clears
 the fold by the 8-10px that keeps the booking flow out of sight.
 
+### The sidebar was shrinking twice
+
+Making the root size follow the viewport height had a consequence that was not
+obvious until it shipped: the sidebar is sized in rem too, so it started
+shrinking along with the main column - on top of a four-step `max-height`
+ladder (940, 880, 830, 790px) that was already stepping the portrait, the
+padding, the nav gaps and the link height down.
+
+That ladder was written when the root was pinned at 17px and the sidebar had no
+other way to survive a short window. With the root scaling, the two compounded.
+At 760px tall the portrait came out at **80px** against a designed 180px - while
+174px of space sat unused between the last nav link and the accessibility
+button. A component was shrinking hard to clear a limit it was nowhere near.
+
+Deleting the ladder fixed it: the root scale alone shrinks the sidebar
+proportionally and keeps the designed relationships intact. At 760px the
+portrait went back to 147px and the dead space fell to 23px.
+
+Three steps remain, at 719, 690 and 645px tall, and they earn their place for a
+reason the old ladder did not: below about 720px the root hits its 13px floor
+and stops scaling, so from there down the sidebar genuinely cannot shrink itself
+out of trouble and the portrait has to give. Measured across 620-1040px tall,
+the clearance under the nav now stays between 14 and 141px and never goes
+negative.
+
+The general lesson is worth keeping: when a global scale is introduced, any
+component that already had its own size ladder now has two, and they multiply.
+Search for `max-height` media queries before changing a root size.
+
 ## Cursor ring
 
 An open ring that runs after the pointer, opening wider over anything a visitor
