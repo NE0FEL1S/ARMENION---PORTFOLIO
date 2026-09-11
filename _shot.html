@@ -1,0 +1,6 @@
+<!doctype html><meta charset="utf-8"><title>s</title>
+<script>
+const q=new URLSearchParams(location.search);
+try{ localStorage.setItem("theme", q.get("theme")||"light"); localStorage.setItem("motion","reduced"); }catch(e){}
+location.replace("/index.html"+(location.hash||"#home"));
+</script>

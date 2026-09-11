@@ -46,7 +46,7 @@
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css" />
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
 
-  <link rel="stylesheet" href="css/style.css?v=1789044104" />
+  <link rel="stylesheet" href="css/style.css?v=1789105260" />
 
   <!-- Marks that JS is running, so scroll-reveal only hides content it can bring back -->
   <script>document.documentElement.className += " js";</script>
@@ -93,6 +93,9 @@
 </head>
 
 <body>
+  <!-- the contour field behind the page; script.js leaves it blank when the
+       visitor has asked for reduced motion -->
+  <canvas class="bgfield" id="bgField" aria-hidden="true"></canvas>
   <a class="skip-link" href="#main">Skip to main content</a>
 
   <!-- ================= MOBILE TOP BAR ================= -->
@@ -117,7 +120,7 @@
           Arbien M. Armenion
           <i class="ph-fill ph-seal-check profile__badge" aria-label="Verified developer" role="img"></i>
         </p>
-        <p class="profile__handle">Web Developer &middot; QA Mindset</p>
+        <p class="profile__handle"><span class="profile__at">@etherealbien</span> &middot; Web Developer</p>
 
         <ul class="socials" aria-label="Social links">
           <li><a href="https://github.com/NE0FEL1S" class="social" aria-label="GitHub profile" target="_blank" rel="noopener noreferrer"><img class="brand-logo brand-logo--dim" src="assets/logos/github.svg" alt="" width="22" height="22" /></a></li>
@@ -166,9 +169,17 @@
             before your visitors ever find it.
           </p>
         </div>
-        <a href="#contact" class="home__cta">
-          Get in touch <i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i>
-        </a>
+        <div class="hero__ctas">
+          <a href="#contact" class="home__cta">
+            Get in touch <i class="ph-bold ph-arrow-up-right" aria-hidden="true"></i>
+          </a>
+          <a href="https://drive.google.com/file/d/1biSU1P6ph-7uT2ROV9F5GgVLucpVIXj3/view?usp=sharing"
+             class="home__cta home__cta--ghost"
+             target="_blank" rel="noopener noreferrer">
+            View resume <i class="ph-bold ph-file-text" aria-hidden="true"></i>
+            <span class="visually-hidden">(opens in a new tab)</span>
+          </a>
+        </div>
       </div>
 
       <!-- ---------- TOOLS MARQUEE ---------- -->
@@ -1105,6 +1116,6 @@
     </button>
   </div>
 
-  <script src="js/script.js?v=1789044104"></script>
+  <script src="js/script.js?v=1789105260"></script>
 </body>
 </html>

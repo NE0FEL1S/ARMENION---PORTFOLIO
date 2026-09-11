@@ -1,55 +1,13 @@
-# Arbien M. Armenion — Portfolio
+# Design & implementation notes
 
-A hand-built portfolio for a web developer with quality assurance experience.
-No frameworks, no build step, no dependencies to install.
+Working notes for this repository: why the layout is built the way it is, the
+constraints each decision was made under, and the measurements behind them.
+Kept out of the README so that stays readable for visitors.
 
-## Stack
+These are the notes that stop a future change from quietly breaking something —
+most of them record a trade-off that is not visible in the CSS itself.
 
-| Layer | Choice | Why |
-| --- | --- | --- |
-| Markup | Semantic HTML5 | Every word is in the source, so crawlers index it instantly |
-| Styling | CSS3 with custom properties | Theming, dark mode and text scaling with no preprocessor |
-| Behaviour | Vanilla JavaScript | About 14 KB unminified, no runtime to download |
-| Font | Poppins (Google Fonts) | Requested; loaded with `preconnect` and `display=swap` |
-| Icons | Phosphor Icons (CDN) | Requested; icon font, tree of styles loaded on demand |
-
-A framework would add a build pipeline and a hydration cost to a site that is
-pure static content. Plain files load faster and deploy anywhere.
-
-## Run it locally
-
-Any static server works. From the project folder:
-
-```bash
-# Python (already on most machines)
-python -m http.server 5173
-
-# or Node
-npx serve .
-```
-
-**Caching while you edit.** `python -m http.server` sends only `Last-Modified`
-and no `Cache-Control`, so a browser can keep serving an old `style.css` after
-you change it, and the page renders with stale rules. The `?v=` stamps on the
-stylesheet and script links in `index.html` handle this: bump them whenever you
-edit those files. If a change still does not show, hard reload with
-`Ctrl` + `Shift` + `R`.
-
-Then open <http://localhost:5173>.
-
-Opening `index.html` directly with `file://` also works, but a server is closer
-to production and keeps relative paths honest.
-
-## Structure
-
-```
-index.html        all page content and SEO metadata
-css/style.css     design tokens, layout, components, responsive rules
-js/script.js      theme, navigation, scroll spy, animations, reading options
-assets/           favicon
-robots.txt        crawler rules
-sitemap.xml       sitemap for search engines
-```
+---
 
 ## Logos
 
@@ -608,32 +566,3 @@ Built for visitors who are older or have low vision.
   interactive targets of at least 44px.
 - `prefers-reduced-motion` and `prefers-color-scheme` are both respected.
 
-## SEO
-
-Title and meta description, canonical URL, Open Graph and Twitter Card tags,
-JSON-LD `Person` and `WebSite` structured data, one `h1` with a clean heading
-hierarchy, descriptive link text, `robots.txt` and `sitemap.xml`.
-
-## Before you deploy
-
-1. The "View resume" button points at a Google Drive file. Anyone with the link
-   can open it — check the sharing setting is what you intend before this is
-   public, and update the URL in `index.html` when you revise the document.
-2. Replace `https://arbienarmenion.com/` in `index.html`, `robots.txt` and
-   `sitemap.xml` with your real domain.
-3. The Projects section holds three real entries, all complete: Sagip Pilipinas,
-   Gourmet Gamble and the Project TIDE-Y thesis. Card images live in
-   `assets/projects/` at 960x540 WebP, about 214 KB for all three. Gourmet
-   Gamble lists feature chips rather than a tech stack, which was never
-   specified.
-4. **Check the AI proficiency levels** on the home board. Daily / Often /
-   Trying and the dot meters are a first guess, not something you told me.
-5. GitHub and LinkedIn are live in the sidebar, the contact section and the
-   JSON-LD `sameAs` array. Add other profiles to all three places if you want
-   them listed.
-6. The sidebar photo is `assets/profile.jpg`, a 400x400 square crop (19 KB)
-   generated from `public/images/profile avatar.jpg` (3 MB, kept as the
-   original). Regenerate the crop if you change the source photo. Never link
-   the 3 MB original from the page.
-7. Link previews currently reuse the profile photo. For a richer card, add a
-   1200x630 image and point `og:image` and `twitter:image` at it.

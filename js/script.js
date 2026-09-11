@@ -165,7 +165,7 @@
   }
 
   /* -----------------------------------------------------------------
-     6. REVEAL ON SCROLL
+     5. REVEAL ON SCROLL
      ----------------------------------------------------------------- */
   const reveals = $$(".reveal");
 
@@ -184,10 +184,197 @@
   }
 
   /* -----------------------------------------------------------------
-     7. MOTION PREFERENCE
+     6. MOTION PREFERENCE
      Read once here; the reading-options panel below uses it too.
      ----------------------------------------------------------------- */
   const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  /* -----------------------------------------------------------------
+     7. BACKGROUND FIELD
+     A WebGL shader behind the page: a faint square grid plus thin
+     contour lines drawn from 2D simplex noise, drifting slowly. Ported
+     from the TopoField effect, which shipped as a React component
+     wrapping a sandboxed iframe; the iframe only existed to isolate a
+     demo page, so none of it is needed here. What matters is the
+     fragment shader, which is framework-agnostic.
+
+     It draws straight alpha onto a transparent canvas rather than
+     baking in a paper colour, so the page's own background shows
+     through and light and dark need no separate build.
+     ----------------------------------------------------------------- */
+  const fieldCanvas = $("#bgField");
+
+  if (fieldCanvas) {
+    const VERT = [
+      "attribute vec2 a_position;",
+      "void main() { gl_Position = vec4(a_position, 0.0, 1.0); }"
+    ].join("\n");
+
+    const FRAG = [
+      "precision highp float;",
+      "uniform vec2  u_resolution;",
+      "uniform float u_time;",
+      "uniform float u_dpr;",
+      "uniform vec3  u_ink;",
+      "uniform float u_grid;",
+      "uniform float u_topo;",
+
+      "vec3 permute(vec3 x) { return mod(((x * 34.0) + 1.0) * x, 289.0); }",
+      "float snoise(vec2 v) {",
+      "  const vec4 C = vec4(0.211324865405187, 0.366025403784439,",
+      "                     -0.577350269189626, 0.024390243902439);",
+      "  vec2 i  = floor(v + dot(v, C.yy));",
+      "  vec2 x0 = v - i + dot(i, C.xx);",
+      "  vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);",
+      "  vec4 x12 = x0.xyxy + C.xxzz; x12.xy -= i1;",
+      "  i = mod(i, 289.0);",
+      "  vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0)) + i.x + vec3(0.0, i1.x, 1.0));",
+      "  vec3 m = max(0.5 - vec3(dot(x0, x0), dot(x12.xy, x12.xy), dot(x12.zw, x12.zw)), 0.0);",
+      "  m = m * m; m = m * m;",
+      "  vec3 x = 2.0 * fract(p * C.www) - 1.0;",
+      "  vec3 h = abs(x) - 0.5;",
+      "  vec3 ox = floor(x + 0.5);",
+      "  vec3 a0 = x - ox;",
+      "  m *= 1.79284291400159 - 0.85373472095314 * (a0 * a0 + h * h);",
+      "  vec3 g;",
+      "  g.x  = a0.x * x0.x + h.x * x0.y;",
+      "  g.yz = a0.yz * x12.xz + h.yz * x12.yw;",
+      "  return 130.0 * dot(m, g);",
+      "}",
+
+      "void main() {",
+      "  vec2 st = gl_FragCoord.xy / u_resolution.xy;",
+      "  st.x *= u_resolution.x / u_resolution.y;",
+
+      /* a one-device-pixel grid, so the rule stays hairline at any density */
+      "  float gridSize = 48.0 * u_dpr;",
+      "  vec2  gridFract = fract(gl_FragCoord.xy / gridSize);",
+      "  float thickness = 1.0 / gridSize;",
+      "  float gridLines = step(1.0 - thickness, gridFract.x) + step(1.0 - thickness, gridFract.y);",
+      "  gridLines = clamp(gridLines, 0.0, 1.0) * u_grid;",
+
+      /* contours: slice the noise into bands and keep only the band edges */
+      "  vec2  noisePos = st * 1.4 + vec2(u_time * 0.015, u_time * 0.025);",
+      "  float n = snoise(noisePos) * 0.5 + 0.5;",
+      "  float wave = abs(fract(n * 10.0) - 0.5) * 2.0;",
+      "  float topoLines = smoothstep(0.025, 0.0, wave) * u_topo;",
+
+      "  float lines = clamp(gridLines + topoLines, 0.0, 1.0);",
+      "  gl_FragColor = vec4(u_ink, lines);",
+      "}"
+    ].join("\n");
+
+    /* premultipliedAlpha off so the shader can output straight alpha */
+    const gl = fieldCanvas.getContext("webgl", {
+      alpha: true, antialias: false, depth: false,
+      premultipliedAlpha: false, powerPreference: "low-power"
+    }) || fieldCanvas.getContext("experimental-webgl");
+
+    if (gl) {
+      function compile(type, src) {
+        const sh = gl.createShader(type);
+        gl.shaderSource(sh, src);
+        gl.compileShader(sh);
+        return gl.getShaderParameter(sh, gl.COMPILE_STATUS) ? sh : null;
+      }
+
+      const vs = compile(gl.VERTEX_SHADER, VERT);
+      const fs = compile(gl.FRAGMENT_SHADER, FRAG);
+      const program = vs && fs ? gl.createProgram() : null;
+
+      if (program) {
+        gl.attachShader(program, vs);
+        gl.attachShader(program, fs);
+        gl.linkProgram(program);
+      }
+
+      /* a shader that will not build is not worth a broken page: leave the
+         canvas blank and let the rest of the site carry on */
+      if (program && gl.getProgramParameter(program, gl.LINK_STATUS)) {
+        gl.useProgram(program);
+
+        const buffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+        gl.bufferData(gl.ARRAY_BUFFER,
+          new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+        const loc = gl.getAttribLocation(program, "a_position");
+        gl.enableVertexAttribArray(loc);
+        gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+        const uRes  = gl.getUniformLocation(program, "u_resolution");
+        const uTime = gl.getUniformLocation(program, "u_time");
+        const uDpr  = gl.getUniformLocation(program, "u_dpr");
+        const uInk  = gl.getUniformLocation(program, "u_ink");
+        const uGrid = gl.getUniformLocation(program, "u_grid");
+        const uTopo = gl.getUniformLocation(program, "u_topo");
+
+        let frame = 0, running = false, startedAt = 0;
+
+        function fieldMotionOff() {
+          return reducedMotionQuery.matches ||
+                 root.getAttribute("data-motion") === "reduced";
+        }
+
+        function sizeField() {
+          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+          const w = window.innerWidth, h = window.innerHeight;
+          fieldCanvas.width = Math.round(w * dpr);
+          fieldCanvas.height = Math.round(h * dpr);
+          gl.viewport(0, 0, fieldCanvas.width, fieldCanvas.height);
+          gl.uniform2f(uRes, fieldCanvas.width, fieldCanvas.height);
+          gl.uniform1f(uDpr, dpr);
+        }
+
+        function paint(now) {
+          const dark = root.getAttribute("data-theme") === "dark";
+          /* navy on a light page, white on a dark one */
+          if (dark) gl.uniform3f(uInk, 1.0, 1.0, 1.0);
+          else      gl.uniform3f(uInk, 0.086, 0.129, 0.243);
+          gl.uniform1f(uGrid, dark ? 0.09 : 0.07);
+          gl.uniform1f(uTopo, dark ? 0.30 : 0.26);
+          gl.uniform1f(uTime, (now - startedAt) * 0.001);
+          gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+          frame = requestAnimationFrame(paint);
+        }
+
+        function startField() {
+          if (running || fieldMotionOff()) return;
+          running = true;
+          startedAt = performance.now();
+          sizeField();
+          frame = requestAnimationFrame(paint);
+        }
+
+        function stopField() {
+          if (!running) return;
+          running = false;
+          cancelAnimationFrame(frame);
+          gl.clearColor(0, 0, 0, 0);
+          gl.clear(gl.COLOR_BUFFER_BIT);
+        }
+
+        let fieldResize = 0;
+        window.addEventListener("resize", () => {
+          if (!running) return;
+          window.clearTimeout(fieldResize);
+          fieldResize = window.setTimeout(sizeField, 180);
+        });
+
+        document.addEventListener("visibilitychange", () => {
+          document.hidden ? stopField() : startField();
+        });
+
+        /* the reading-options switch can turn motion off mid-run */
+        new MutationObserver(() => { fieldMotionOff() ? stopField() : startField(); })
+          .observe(root, { attributes: true, attributeFilter: ["data-motion"] });
+        reducedMotionQuery.addEventListener("change", () => {
+          fieldMotionOff() ? stopField() : startField();
+        });
+
+        startField();
+      }
+    }
+  }
 
   /* -----------------------------------------------------------------
      8. MARQUEE PAUSE CONTROL
